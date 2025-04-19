@@ -1,6 +1,3 @@
-
-
-
 ##Useful commands:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 .\hello\Scripts\Activate.ps1
