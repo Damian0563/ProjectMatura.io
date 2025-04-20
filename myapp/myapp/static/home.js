@@ -1,4 +1,11 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
-    console.log('test')
+    
+    document.getElementById('signUP').addEventListener('click',()=>{
+        window.location.href='/rejestracja'
+    })
+
+    document.getElementById('signIN').addEventListener('click',()=>{
+        window.location.href='/logowanie'
+    })
 })  
