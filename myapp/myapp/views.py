@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render # type: ignore
 import json
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
-
+from django.http import JsonResponse # type: ignore
+from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
+from .models import User,Payment
+from . import postgresql
 
 def home(req):
     if(req.method=="GET"):
@@ -17,7 +17,11 @@ def signUP(req):
         data = json.loads(req.body)
         mail = data.get('mail')
         password = data.get('password')
-        return JsonResponse({'status':'success'})
+        if(postgresql.find(mail)):
+            postgresql.insert(mail,password)
+            return JsonResponse({'status':200})
+        else:
+            return JsonResponse({'status':402})
 
 @ensure_csrf_cookie
 def signIN(req):
@@ -27,4 +31,7 @@ def signIN(req):
         data=json.loads(req.body)
         mail=data.get('mail')
         password=data.get('password')
-        return JsonResponse({'status':'success'})
+        if(postgresql.check_credentials(mail,password)):
+            return JsonResponse({'status':200})
+        else:
+            return JsonResponse({'status':402})
