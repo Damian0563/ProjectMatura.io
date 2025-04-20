@@ -3,10 +3,10 @@ ProjectMatura.io is an e-learning platform with the aim to help Polish students 
 
 
 ## Useful commands:
-'''console
+```console
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-.\hello\Scripts\Activate.ps1
+.\venv\Scripts\Activate.ps1
 django-admin startproject myapp
 python manage.py runserver
 pip freeze > requirements.txt
-'''
+```

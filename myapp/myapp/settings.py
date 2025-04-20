@@ -122,3 +122,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_COOKIE_PATH = '/'
+CSRF_COOKIE_DOMAIN = None  # This allows cookies to be accessible on all subdomains
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cross-site cookies
+CSRF_COOKIE_SECURE = True  # Ensure that cookies are only sent over HTTPS
