@@ -39,4 +39,5 @@ def signIN(req):
         
 
 def main(req,id):
+    req.session['test']='hello'
     return render(req,'myapp/main.html')

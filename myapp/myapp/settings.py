@@ -134,3 +134,5 @@ CSRF_COOKIE_PATH = '/'
 CSRF_COOKIE_DOMAIN = None  # This allows cookies to be accessible on all subdomains
 CSRF_COOKIE_SAMESITE = 'None'  # Allow cross-site cookies
 CSRF_COOKIE_SECURE = True  # Ensure that cookies are only sent over HTTPS
+SESSION_COOKIE_AGE = 900
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
