@@ -37,8 +37,14 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }).then(response=>response.json())
         .then(data=>{
-            if(data.status==200) console.log('success')
-            else if(data.status==402) console.log('failure')
+            if(data.status==200){
+                document.getElementById('message').innerText="Pomyślnie utworzono konto.✅"
+                document.getElementById('popup').style.display='grid'
+            }   
+            else if(data.status==402){
+                document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
+                document.getElementById('popup').style.display='grid'
+            }
         })
         .catch(e=>console.error(e))
     })

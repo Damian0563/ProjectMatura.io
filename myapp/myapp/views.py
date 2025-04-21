@@ -32,6 +32,11 @@ def signIN(req):
         mail=data.get('mail')
         password=data.get('password')
         if(postgresql.check_credentials(mail,password)):
-            return JsonResponse({'status':200})
+            id=postgresql.encode_id(mail)
+            return JsonResponse({'status':200,'id':id})
         else:
             return JsonResponse({'status':402})
+        
+
+def main(req,id):
+    return render(req,'myapp/main.html')

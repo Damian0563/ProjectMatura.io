@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const password=document.getElementById('floatingPassword').value
         document.getElementById('floatingInput').value=''
         document.getElementById('floatingPassword').value=''
+        console.log('clicked')
         fetch('/logowanie',{
             method:"POST",
             headers:{
@@ -38,7 +39,13 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }).then(response=>response.json())
         .then(data=>{
-            console.log(data)
+            console.log(data.status," ",data.id)
+            if(data.status==402){
+                document.getElementById('message').innerText="Logowanie na podany adres mail się nie powiodła.❌"
+                document.getElementById('popup').style.display='grid'
+            }else if(data.status==200){
+                window.location.href=`/mail/${data.id}`
+            }
         })
         .catch(e=>console.error(e))
     })

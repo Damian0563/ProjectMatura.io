@@ -25,3 +25,9 @@ def change_status(mail):
         return True
     except User.DoesNotExist:
         return False
+    
+def encode_id(mail):
+    return 10
+
+def decode_id(id):
+    return 10
