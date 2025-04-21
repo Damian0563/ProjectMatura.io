@@ -17,7 +17,7 @@ def signUP(req):
         data = json.loads(req.body)
         mail = data.get('mail')
         password = data.get('password')
-        if(postgresql.find(mail)):
+        if(not postgresql.find(mail)):
             postgresql.insert(mail,password)
             return JsonResponse({'status':200})
         else:

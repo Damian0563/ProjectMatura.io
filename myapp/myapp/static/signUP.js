@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }).then(response=>response.json())
         .then(data=>{
-            console.log(data)
+            if(data.status==200) console.log('success')
+            else if(data.status==402) console.log('failure')
         })
         .catch(e=>console.error(e))
     })
