@@ -19,6 +19,7 @@ def signUP(req):
         password = data.get('password')
         if(not postgresql.find(mail)):
             postgresql.insert(mail,password)
+            #mail
             return JsonResponse({'status':200})
         else:
             return JsonResponse({'status':402})
