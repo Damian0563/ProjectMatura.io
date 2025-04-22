@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                 document.getElementById('message').innerText="Logowanie na podany adres mail się nie powiodła.❌"
                 document.getElementById('popup').style.display='grid'
             }else if(data.status==200){
-                window.location.href=`/mail/${data.id}`
+                window.location.href=`/main`
             }
         })
         .catch(e=>console.error(e))

@@ -23,5 +23,5 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('rejestracja',views.signUP,name='signUP'),
     path('logowanie',views.signIN,name='signIN'),
-    path('mail/<int:id>/',views.main,name='main')
+    path('main',views.main,name='main')
 ]

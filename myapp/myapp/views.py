@@ -1,4 +1,4 @@
-from django.shortcuts import render # type: ignore
+from django.shortcuts import render,redirect # type: ignore
 import json
 from django.http import JsonResponse # type: ignore
 from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
@@ -33,11 +33,19 @@ def signIN(req):
         password=data.get('password')
         if(postgresql.check_credentials(mail,password)):
             id=postgresql.encode_id(mail)
+            req.session['id']=id
             return JsonResponse({'status':200,'id':id})
         else:
             return JsonResponse({'status':402})
         
 
-def main(req,id):
-    req.session['test']='hello'
-    return render(req,'myapp/main.html')
+def main(req):
+    if req.session:
+        id=req.session['id']
+        mail=postgresql.decode_id(id)
+        status=postgresql.get_status(mail)
+        if status!="":
+            return redirect('home')
+        return render(req,'myapp/main.html')
+    else:
+        return redirect('signIN')

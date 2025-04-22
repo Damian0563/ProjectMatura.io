@@ -26,8 +26,25 @@ def change_status(mail):
     except User.DoesNotExist:
         return False
     
+shift=4
 def encode_id(mail):
-    return 10
+    result=''
+    for i in range(len(mail)):
+        if chr(ord(mail[i])+shift):
+            result+=chr(ord(mail[i])+shift)
+    return result
 
 def decode_id(id):
-    return 10
+    result=''
+    for i in range(len(id)):
+        if(chr(ord(id[i])-shift)):
+            result+=str(chr(ord(id[i])-shift))
+    return result
+
+
+def get_status(mail):
+    try:
+        user = User.objects.get(mail=mail)
+        return user.type
+    except User.DoesNotExist:
+        return ""
