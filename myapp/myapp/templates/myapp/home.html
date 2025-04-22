@@ -51,8 +51,93 @@
         </div>
         <div class="product-device shadow-sm d-none d-md-block"></div>
         <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+
+        <div class="container my-5">
+          <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+            <video class="w-100 h-100" controls src="{% static 'intro.mp4' %}" style="object-fit: cover;"></video>
+          </div>
+        </div>
     </div>
 
+    <div class="px-4 pt-5 my-5 text-center border-bottom pb-5 mb-5">
+      <h1 class="display-6 fw-bold text-body-emphasis">Zakres kursu</h1>
+      <div class="col-lg-10 mx-auto">
+        <p class="lead mb-6">
+          Kurs obejmuje wszystkie zagadnienia z matematyki, które wymagane są od maturzystów na egzaminie maturalnym.
+          Dokładnie opracowane działy matematyki, przerobione typowe zadania z lat ubiegłych i prace domowe pozwolą na 
+          zdanie egzaminu podstawowego z matematyki na satysfakcjunującym poziomie.<br>
+          <strong>UWAGA: Ten kurs służy do przygotowania jedynie do matury podstawowej</strong>.
+        </p>
+        <div style="margin-top: 5%;font-size: 1.2rem;">
+          <div class="row">
+            <div class="col">Funkcje</div>
+            <div class="col">Liczby rzeczywiste</div>
+            <div class="col">Planimetria</div>
+          </div>
+          <div class="row">
+            <div class="col">Prawdopodobieństwo</div>
+            <div class="col">Logarytmy</div>
+            <div class="col">Kombinatoryka</div>
+          </div>
+          <div class="row">
+            <div class="col">Równania i nierówności</div>
+            <div class="col">Ciągi</div>
+            <div class="col">Okręgi</div>
+          </div>
+          <div class="row">
+            <div class="col">Geometria</div>
+            <div class="col">Trygonometria</div>
+            <div class="col">Zadania optymalizacyjne</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex;align-items: stretch;justify-content:center;gap:3rem">
+      <div class="col-lg-5" style="color: azure;max-width: 60vw;">
+        <div class="card mb-4 bg-dark rounded-3 shadow-sm" style="color: azure;" data-bs-theme="dark">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Wersja darmowa</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">0 zł<small class="text-body-secondary fw-light"></small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Dostęp do serwera Discord społeczności</li>
+              <li>Rozdział "Funkcje"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5" style="color: azure;max-width: 60vw;">
+        <div class="card mb-4 bg-dark rounded-3 shadow-sm" style="color: azure;" data-bs-theme="dark">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Wersja płatna</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">20 zł<small class="text-body-secondary fw-light">/miesięcznie</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Dostęp do serwera Discord społeczności</li>
+              <li>Pełen dostęp do wszystkich opracowanych zagadnień</li>
+              <li>Interaktywne prace domowe</li>
+              <li>Możliwość konsultacji w ramach społeczności</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="about">
+
+    </div>
+
+    <div id="faq">
+
+    </div>
+
+    <footer class="bg-dark p-3" style="display:flex ;height: 10vh;justify-content: center;align-items: center;">
+        <div style="color: azure;margin: auto;justify-content: center;align-items: center;">
+          ProjectMatura.io 2025
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="{% static 'home.js' %}"></script>
 </body>
