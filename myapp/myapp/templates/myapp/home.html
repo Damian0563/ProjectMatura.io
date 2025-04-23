@@ -20,6 +20,9 @@
         background-color: white;
         color: lightskyblue;
       }
+      html{
+        scroll-behavior: smooth;
+      }
     </style>
     <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
         <div class="container">
@@ -29,9 +32,9 @@
           <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <div class="offcanvas-body">
               <ul class="navbar-nav flex-grow-1 justify-content-between">
-                <li class="nav-item"><a class="nav-link" href="#">O mnie</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Zakres kursu</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Cena</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">O mnie</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kurs">Zakres kursu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kurs">Cena</a></li>
                 <button id="signUP" class="btn btn-primary">Zarejestruj się</button>
                 <button id="signIN" class="btn btn-primary">Zaloguj się</button>
               </ul>
@@ -43,7 +46,7 @@
         <div class="col-md-9 p-lg-5 mx-auto my-5">
           <h1 class="display-8 fw-bold">Marzysz o zdaniu matury podstawowej z matematyki? Super, że tu jesteś!</h1>
           <div class="d-flex gap-3 justify-content-center lead fw-normal">
-            <a class="icon-link" href="#">
+            <a class="icon-link" href="#kurs">
               Dowiedz się więcej
               <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"/></svg>
             </a>
@@ -59,7 +62,7 @@
         </div>
     </div>
 
-    <div class="px-4 pt-5 my-5 text-center border-bottom pb-5 mb-5">
+    <div class="px-4 pt-5 my-5 text-center border-bottom pb-5 mb-5" id="kurs">
       <h1 class="display-6 fw-bold text-body-emphasis">Zakres kursu</h1>
       <div class="col-lg-10 mx-auto">
         <p class="lead mb-6">
@@ -68,7 +71,7 @@
           zdanie egzaminu podstawowego z matematyki na satysfakcjunującym poziomie.<br>
           <strong>UWAGA: Ten kurs służy do przygotowania jedynie do matury podstawowej</strong>.
         </p>
-        <div style="margin-top: 5%;font-size: 1.2rem;">
+        <div style="margin-top: 5%;font-size: 1.6rem;">
           <div class="row">
             <div class="col">Funkcje</div>
             <div class="col">Liczby rzeczywiste</div>
@@ -92,7 +95,7 @@
         </div>
       </div>
     </div>
-    <div style="display: flex;align-items: stretch;justify-content:center;gap:3rem">
+    <div style="display: flex;align-items: stretch;justify-content:center;gap:3rem" id="cena">
       <div class="col-lg-5" style="color: azure;max-width: 60vw;">
         <div class="card mb-4 bg-dark rounded-3 shadow-sm" style="color: azure;" data-bs-theme="dark">
           <div class="card-header py-3">
@@ -125,12 +128,12 @@
       </div>
     </div>
     
-    <div id="about" class=" bg-dark" style="display: flex;justify-content: space-around;padding: 3%;">
-      <img src="{% static 'ProjectMatura.png' %}" style="position: relative; float: left;max-width: 400px;max-height: 400px;border-radius: 50%;margin-top: 7%;">
+    <div id="about" class=" bg-dark p-3 p-md-5 m-md-3" style="display: flex;justify-content: space-around;padding: 3%;">
+      <img src="{% static 'about.jpg' %}" style="position: relative; float: left;max-width: 700px;max-height: 400px;border-radius: 50%;margin-top: 7%;">
       <div style="position: relative;float: right;margin: 3%;">
-        <h1 class="display-6 fw-bold text-body-emphasis" style="color: azure !important;">O mnie</h1><br>
-        <h2 class="display-6 fw-bold text-body-emphasis" style="color: lightskyblue !important;">Cześć jestem Damian👋,</h2><br>
-        <p class="lead mb-6" style="color: azure !important;">Jestem studentem informatyki, który w roku 2024 zdawał mature. Chciałbym podzielić się z wami wiedzą, którą nabyłem podczas przygotowań do egzaminu maturalnego przez cztery lata liceum. 
+        <h1 class="display-8 fw-bold text-body-emphasis" style="color: azure !important;">O mnie</h1><br>
+        <h2 class="display-8 fw-bold text-body-emphasis" style="color: lightskyblue !important;">Cześć jestem Damian👋,</h2><br>
+        <p class="lead mb-8" style="color: azure !important;">Jestem studentem informatyki, który w roku 2024 zdawał mature. Chciałbym podzielić się z wami wiedzą, którą nabyłem podczas przygotowań do egzaminu maturalnego przez cztery lata liceum. 
           Bardzo dobrze zdaję sobie sprawę z powagi tego egzaminu, dla wielu jest on przepustką na studia a dla innych tylko jednym z wielu testów do "odhaczenia". Nie zależnie z jakimi ambicjami podchodzicie do matury z matematyki,
           chcę pomóc Wam w osiągnięciu Waszych celów. Pamiętam stres, który odczuwałem podczas pisania egzaminu maturalnego, presja była ogromna. Jednak najlepszym sposobem na przezwyciężenie tego strachu jest
           sumienne przygotowanie. Mam za cel sprawienie aby kursanci nie martwili się tym czy zdobędą 28, może 30%, jednak aby martwili się o to czy wynik będzie trzycyfrowy, czy też nie.

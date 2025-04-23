@@ -20,7 +20,7 @@ def check_credentials(mail, password):
 def change_status(mail):
     try:
         user = User.objects.get(mail=mail)
-        user.type = "admin"  # or any status you want
+        user.type = "admin"
         user.save()
         return True
     except User.DoesNotExist:

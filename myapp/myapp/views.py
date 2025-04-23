@@ -45,7 +45,7 @@ def main(req):
     id=req.session['id']
     mail=postgresql.decode_id(id)
     status=postgresql.get_status(mail)
-    if status=="":
-        return redirect('home')
-    return render(req,'myapp/main.html')
+    if status=="": return redirect('home')
+    elif status=='guest': return render(req,'myapp/guest.html')
+    else: return render(req,'myapp/full.html')
     
