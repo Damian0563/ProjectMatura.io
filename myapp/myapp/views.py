@@ -4,6 +4,7 @@ from django.http import JsonResponse # type: ignore
 from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
 from .models import User,Payment
 from . import postgresql
+from . import mail
 
 def home(req):
     if(req.method=="GET"):
@@ -15,11 +16,11 @@ def signUP(req):
         return render(req,'myapp/signUP.html')
     elif req.method=="POST":
         data = json.loads(req.body)
-        mail = data.get('mail')
+        user_mail = data.get('mail')
         password = data.get('password')
-        if(not postgresql.find(mail)):
-            postgresql.insert(mail,password)
-            #mail
+        if(not postgresql.find(user_mail)):
+            postgresql.insert(user_mail,password)
+            mail.account_creation(user_mail)
             return JsonResponse({'status':200})
         else:
             return JsonResponse({'status':402})
@@ -41,12 +42,10 @@ def signIN(req):
         
 
 def main(req):
-    if req.session:
-        id=req.session['id']
-        mail=postgresql.decode_id(id)
-        status=postgresql.get_status(mail)
-        if status!="":
-            return redirect('home')
-        return render(req,'myapp/main.html')
-    else:
-        return redirect('signIN')
+    id=req.session['id']
+    mail=postgresql.decode_id(id)
+    status=postgresql.get_status(mail)
+    if status=="":
+        return redirect('home')
+    return render(req,'myapp/main.html')
+    

@@ -1,0 +1,22 @@
+import os
+from dotenv import load_dotenv
+import smtplib
+load_dotenv()
+
+def account_creation(mail):
+    subject = "Potwierdzenie utworzenia konta na ProjectMatura.io"
+    message = f"""\
+    Dzień Dobry,
+
+        Dziękujemy za utworzenie konta na platformie ProjectMatura.io. Ten mail jest potwierdzeniem utworzenia konta.Jeżeli Pan/Pani nie utworzył konta w naszym serwisie, prosimy o niezwłoczny kontakt.
+
+    Z poważaniem,
+    ProjectMatura.io
+    """
+    text = f"Subject: {subject}\nTo: {mail}\nFrom: projectmatura.io@gmail.com\n\n{message}"
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login('projectmatura.io@gmail.com', os.getenv('GMAIL_PASS'))
+    server.sendmail('projectmatura.io@gmail.com', mail, text.encode('utf-8'))
+    server.quit()
