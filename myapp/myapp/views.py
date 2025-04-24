@@ -36,18 +36,40 @@ def signIN(req):
         if(postgresql.check_credentials(mail,password)):
             id=postgresql.encode_id(mail)
             req.session['id']=id
+            response = redirect('main')
+            # if remember_me_checked:
+            #     token = add_token(mail)
+            #     response.set_cookie(
+            #         'remember_token',
+            #         token,
+            #         max_age=3600*24*30,  # 30 days
+            #         httponly=True,
+            #         secure=True  # Only over HTTPS
+            #     )
             return JsonResponse({'status':200,'id':id})
         else:
             return JsonResponse({'status':402})
         
-
 def main(req):
-    id=req.session['id']
-    mail=postgresql.decode_id(id)
-    status=postgresql.get_status(mail)
-    if status=="": return redirect('home')
-    elif status=='guest': return render(req,'myapp/guest.html')
-    else: return render(req,'myapp/full.html')
+    if 'id' in req.session:
+        mail = postgresql.decode_id(req.session['id'])    
+    elif 'remember_token' in req.COOKIES:
+        token = req.COOKIES['remember_token']
+        mail = postgresql.get_mail_from_token(token)
+        if mail:
+            req.session['id'] = postgresql.encode_id(mail)
+        else:
+            return redirect('home') 
+    else:
+        return redirect('home')
+    status = postgresql.get_status(mail)
+    if status == "":
+        return redirect('home')
+    elif status == 'guest':
+        return render(req, 'myapp/guest.html')
+    else:
+        return render(req, 'myapp/full.html')
+
     
 
 def acc(req):

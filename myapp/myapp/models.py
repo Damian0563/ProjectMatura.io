@@ -9,3 +9,8 @@ class Payment(models.Model):
     mail=models.CharField(max_length=50)
     price=models.FloatField()
     date=models.DateField()
+
+class Token(models.Model):
+    mail=models.CharField(max_length=50)
+    token=models.CharField(max_length=33)
+    waranty=models.FloatField()

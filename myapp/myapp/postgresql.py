@@ -1,5 +1,7 @@
 import bcrypt#type: ignore
-from .models import User
+import time
+from uuid import uuid4
+from .models import User, Token, Payment
 
 def find(mail):
     return User.objects.filter(mail=mail).exists()
@@ -47,3 +49,26 @@ def get_status(mail):
         return user.type
     except User.DoesNotExist:
         return ""
+    
+def add_token(mail):
+    token=str(uuid4())
+    waranty=time.time()+3600*24*30
+    Token.objects.create(mail=mail,token=token,waranty=waranty)
+
+def check_waranty(mail):
+    try:
+        token=Token.objects.get(mail=mail)
+        if token.waranty>=time.time():
+            return True
+        return False
+    except Token.DoesNotExist:
+        return False
+    
+def get_mail_from_token(token_value):
+    try:
+        token = Token.objects.get(token=token_value)
+        if token.waranty >= time.time():
+            return token.mail
+    except Token.DoesNotExist:
+        pass
+    return None
