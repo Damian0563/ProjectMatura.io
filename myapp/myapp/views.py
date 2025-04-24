@@ -49,3 +49,6 @@ def main(req):
     elif status=='guest': return render(req,'myapp/guest.html')
     else: return render(req,'myapp/full.html')
     
+
+def acc(req):
+    return render(req,'myapp/account.html')

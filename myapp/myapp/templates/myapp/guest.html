@@ -12,7 +12,33 @@
 </head>
 
 <body>
-    <p>test2</p>
+    <style>
+        #signout{
+            transition: 0.5s ease-in-out;
+        }
+        #signout:hover{
+            transform: scale(1.05);
+            background-color: azure;
+            color: red;
+        }
+    </style>
+    <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark" style="margin-bottom: 5%;">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-body">
+              <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
+                <img src="{% static 'ProjectMatura.png' %}" style="max-width: 75px;max-height: 75px;border-radius: 50%;">
+                <li class="nav-item"><a class="nav-link" href="/main/konto">Moje konto</a></li>
+                <li class="nav-item"><a class="nav-link" id="buy">Kup kurs</a></li>
+                <button id="signout" class="btn btn-danger">Wyloguj się</button>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>

@@ -1,4 +1,3 @@
-import psycopg2
 import bcrypt#type: ignore
 from .models import User
 
