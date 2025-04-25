@@ -5,6 +5,11 @@ from django.http import JsonResponse # type: ignore
 from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
 from . import postgresql
 from . import mail
+import os
+import stripe
+from dotenv import load_dotenv
+load_dotenv()
+stripe.api_key = os.getenv('STRIPE_SECRET')
 
 def home(req):
     if(req.method=="GET"):
@@ -84,3 +89,18 @@ def log_out(req):
 
 def acc(req):
     return render(req,'myapp/account.html')
+
+@ensure_csrf_cookie
+def create_checkout_session(req):
+    data=json.loads(req.body)
+    checkout_session=stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        mode='subscription',
+        success_url='http://127.0.0.1:8000/main',
+        cancel_url='http://127.0.0.1:8000/',
+        line_items=[{
+            "price": data["priceId"],
+            "quantity": 1,
+        }],
+    )
+    return JsonResponse({'sessionId':checkout_session.id})
