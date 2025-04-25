@@ -24,27 +24,30 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('sign').addEventListener('click',async()=>{
         const mail=document.getElementById('floatingInput').value
         const password=document.getElementById('floatingPassword').value
+        const box=document.getElementById('checkDefault').checked
         document.getElementById('floatingInput').value=''
         document.getElementById('floatingPassword').value=''
-        console.log('clicked')
+        document.getElementById('checkDefault').checked=false
         fetch('/logowanie',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json',
                 'X-CSRFToken': csrftoken,
             },
+            credentials:'include',
             body:JSON.stringify({
                 "mail":mail,
-                "password":password
+                "password":password,
+                "remember":box,
             })
-        }).then(response=>response.json())
+        })
+        .then(response=>response.json())
         .then(data=>{
-            console.log(data.status," ",data.id)
-            if(data.status==402){
-                document.getElementById('message').innerText="Logowanie na podany adres mail się nie powiodła.❌"
+            if(data.status==200){
+                window.location.href = data.redirect_url
+            }else if(data.status==404){
+                document.getElementById('message').innerText="Logowanie nie powiodło się.❌"
                 document.getElementById('popup').style.display='grid'
-            }else if(data.status==200){
-                window.location.href=`/main`
             }
         })
         .catch(e=>console.error(e))

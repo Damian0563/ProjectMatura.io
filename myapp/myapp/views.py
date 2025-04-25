@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect # type: ignore
 import json
+from django.urls import reverse #type:ignore
 from django.http import JsonResponse # type: ignore
 from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
 from .models import User,Payment
@@ -33,22 +34,23 @@ def signIN(req):
         data=json.loads(req.body)
         mail=data.get('mail')
         password=data.get('password')
+        remember_me_checked=data.get('remember',False)
         if(postgresql.check_credentials(mail,password)):
             id=postgresql.encode_id(mail)
             req.session['id']=id
             response = redirect('main')
-            # if remember_me_checked:
-            #     token = add_token(mail)
-            #     response.set_cookie(
-            #         'remember_token',
-            #         token,
-            #         max_age=3600*24*30,  # 30 days
-            #         httponly=True,
-            #         secure=True  # Only over HTTPS
-            #     )
-            return JsonResponse({'status':200,'id':id})
+            if remember_me_checked:
+                token = postgresql.add_token(mail)
+                response.set_cookie(
+                    'remember_token',
+                    token,
+                    max_age=3600*24*30,
+                    httponly=True,
+                    secure=True 
+                )
+            return JsonResponse({'status':200,'redirect_url': reverse('main')})
         else:
-            return JsonResponse({'status':402})
+            return JsonResponse({'status':404})
         
 def main(req):
     if 'id' in req.session:

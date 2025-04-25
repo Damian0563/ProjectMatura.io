@@ -54,6 +54,7 @@ def add_token(mail):
     token=str(uuid4())
     waranty=time.time()+3600*24*30
     Token.objects.create(mail=mail,token=token,waranty=waranty)
+    return token
 
 def check_waranty(mail):
     try:

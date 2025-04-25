@@ -12,5 +12,5 @@ class Payment(models.Model):
 
 class Token(models.Model):
     mail=models.CharField(max_length=50)
-    token=models.CharField(max_length=33)
+    token=models.CharField(max_length=100)
     waranty=models.FloatField()
