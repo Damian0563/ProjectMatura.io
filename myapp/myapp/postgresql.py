@@ -56,11 +56,19 @@ def add_token(mail):
     Token.objects.create(mail=mail,token=token,waranty=waranty)
     return token
 
+def delete_token(remember_token):
+    try:
+        token_obj = Token.objects.get(token=remember_token)
+        token_obj.delete()
+    except Token.DoesNotExist:
+        pass
+
 def check_waranty(mail):
     try:
         token=Token.objects.get(mail=mail)
         if token.waranty>=time.time():
             return True
+        delete_token(token)
         return False
     except Token.DoesNotExist:
         return False

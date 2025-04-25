@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded',()=>{
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
-
     document.getElementById('signout').addEventListener('click',async()=>{
         console.log('CLICKED')
         fetch('/main/log_out',{

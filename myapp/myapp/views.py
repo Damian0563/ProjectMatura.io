@@ -3,7 +3,6 @@ import json
 from django.urls import reverse #type:ignore
 from django.http import JsonResponse # type: ignore
 from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
-from .models import User,Payment
 from . import postgresql
 from . import mail
 
@@ -71,8 +70,17 @@ def main(req):
         return render(req, 'myapp/guest.html')
     else:
         return render(req, 'myapp/full.html')
-
     
+def log_out(req):
+    if req.method=='POST':
+        req.session.flush() 
+        remember_token = req.COOKIES.get('remember_token')
+        if remember_token:
+            postgresql.delete_token(remember_token)
+        response = redirect('signIN')
+        response.delete_cookie('remember_token')
+        return JsonResponse({'ok':200})
+
 
 def acc(req):
     return render(req,'myapp/account.html')
