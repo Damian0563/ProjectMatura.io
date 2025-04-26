@@ -14,11 +14,22 @@ def is_subscription_active(mail):
         payment = Payment.objects.get(mail=mail)
         if payment.stripe_subscription_id:
             subscription = stripe.Subscription.retrieve(payment.stripe_subscription_id)
-            return subscription['status'] == 'active'
+            return subscription['status'] in ['active', 'trialing']
+        return False
     except Payment.DoesNotExist:
         return False
-    return False
+    except Exception as e:
+        print(f"Stripe error: {e}")
+        return False
 
+def insert_payment(mail, stripe_customer_id, stripe_subscription_id):
+    try:
+        payment = Payment.objects.get(mail=mail)
+        payment.stripe_customer_id = stripe_customer_id
+        payment.stripe_subscription_id = stripe_subscription_id
+        payment.save()
+    except Payment.DoesNotExist:
+        Payment.objects.create(mail=mail, stripe_customer_id=stripe_customer_id, stripe_subscription_id=stripe_subscription_id)
 
 def find(mail):
     return User.objects.filter(mail=mail).exists()
@@ -73,10 +84,10 @@ def add_token(mail):
     Token.objects.create(mail=mail,token=token,waranty=waranty)
     return token
 
-def delete_token(remember_token):
+def delete_tokens(mail):
     try:
-        token_obj = Token.objects.get(token=remember_token)
-        token_obj.delete()
+        tokens = Token.objects.filter(mail=mail)
+        tokens.delete()
     except Token.DoesNotExist:
         pass
 
@@ -85,7 +96,7 @@ def check_waranty(mail):
         token=Token.objects.get(mail=mail)
         if token.waranty>=time.time():
             return True
-        delete_token(token)
+        delete_tokens(mail)
         return False
     except Token.DoesNotExist:
         return False

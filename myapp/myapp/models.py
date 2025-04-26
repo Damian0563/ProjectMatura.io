@@ -7,8 +7,6 @@ class User(models.Model):
 
 class Payment(models.Model):
     mail=models.CharField(max_length=50)
-    price=models.FloatField()
-    date=models.DateField()
     stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)
     stripe_subscription_id = models.CharField(max_length=255, blank=True, null=True)
 

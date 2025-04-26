@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             credentials:'include',
         })
         .then(response=>{
-            console.log(response)
             if(response.ok) window.location.href='/'
         })
         .catch(e=>console.error(e))
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             method:"POST",
             headers:{'Content-Type':'application/json','X-CSRFToken':csrftoken},
             body:JSON.stringify({
-                priceId:price
+                priceId:price,
             })
         }).then(response=>response.json())
         .then((data) => {

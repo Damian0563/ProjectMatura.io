@@ -17,4 +17,5 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 django-admin startproject myapp
 python manage.py runserver
 pip freeze > requirements.txt
+stripe listen --forward-to localhost:8000/webhook/
 ```

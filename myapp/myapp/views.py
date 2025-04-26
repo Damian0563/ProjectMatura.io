@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect # type: ignore
 import json
 from django.urls import reverse #type:ignore
 from django.http import JsonResponse # type: ignore
-from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt # type: ignore
 from . import postgresql
+from django.http import HttpResponse # type: ignore
 from . import mail
+from uuid import uuid4 # type: ignore
 import os
 import stripe
 from dotenv import load_dotenv
@@ -44,6 +46,7 @@ def signIN(req):
             req.session['id']=id
             response = redirect('main')
             if remember_me_checked:
+                postgresql.delete_tokens(mail)
                 token = postgresql.add_token(mail)
                 response.set_cookie(
                     'remember_token',
@@ -68,7 +71,7 @@ def main(req):
             return redirect('home') 
     else:
         return redirect('home')
-    
+    print(postgresql.is_subscription_active(mail))
     if postgresql.is_subscription_active(mail):
         return render(req, 'myapp/full.html')
     else:
@@ -106,5 +109,22 @@ def create_checkout_session(req):
     return JsonResponse({'sessionId':checkout_session.id})
 
 
+@csrf_exempt
+def stripe_webhook(req):
+    payload = req.body
+    sig_header = req.headers.get('stripe-signature')
+    endpoint_secret = os.getenv('ENDPOINT_SECRET')
+    try:
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+    except (ValueError, stripe.error.SignatureVerificationError):
+        return HttpResponse(status=400)
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        
+        customer_id = session.get('customer')
+        subscription_id = session.get('subscription')
+        client_reference_id = session.get('client_reference_id')
+        postgresql.insert_payment("damian.realmadrid2005@gmail.com", customer_id, subscription_id)
+    return JsonResponse({'status': 200})
 def fail(req):
     return render(req,'myapp/fail.html')
