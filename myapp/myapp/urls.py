@@ -26,5 +26,6 @@ urlpatterns = [
     path('main',views.main,name='main'),
     path('main/konto',views.acc,name='konto'),
     path('main/log_out', views.log_out, name='log_out'),
-    path('main/create_checkout_session',views.create_checkout_session,name='create_checkout_session')
+    path('main/create_checkout_session',views.create_checkout_session,name='create_checkout_session'),
+    path('/fail',views.fail,name='fail'),
 ]

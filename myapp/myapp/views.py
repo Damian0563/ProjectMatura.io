@@ -68,13 +68,13 @@ def main(req):
             return redirect('home') 
     else:
         return redirect('home')
-    status = postgresql.get_status(mail)
-    if status == "":
-        return redirect('home')
-    elif status == 'guest':
-        return render(req, 'myapp/guest.html')
-    else:
+    
+    if postgresql.is_subscription_active(mail):
         return render(req, 'myapp/full.html')
+    else:
+        return render(req, 'myapp/guest.html')
+    
+        
     
 def log_out(req):
     if req.method=='POST':
@@ -97,10 +97,14 @@ def create_checkout_session(req):
         payment_method_types=['card'],
         mode='subscription',
         success_url='http://127.0.0.1:8000/main',
-        cancel_url='http://127.0.0.1:8000/',
+        cancel_url='http://127.0.0.1:8000/fail',
         line_items=[{
             "price": data["priceId"],
             "quantity": 1,
         }],
     )
     return JsonResponse({'sessionId':checkout_session.id})
+
+
+def fail(req):
+    return render(req,'myapp/fail.html')

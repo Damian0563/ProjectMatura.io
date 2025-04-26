@@ -2,6 +2,23 @@ import bcrypt#type: ignore
 import time
 from uuid import uuid4
 from .models import User, Token, Payment
+import stripe
+import os
+from dotenv import load_dotenv
+load_dotenv()
+stripe.api_key = os.getenv('STRIPE_SECRET')
+
+
+def is_subscription_active(mail):
+    try:
+        payment = Payment.objects.get(mail=mail)
+        if payment.stripe_subscription_id:
+            subscription = stripe.Subscription.retrieve(payment.stripe_subscription_id)
+            return subscription['status'] == 'active'
+    except Payment.DoesNotExist:
+        return False
+    return False
+
 
 def find(mail):
     return User.objects.filter(mail=mail).exists()
