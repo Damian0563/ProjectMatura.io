@@ -33,12 +33,16 @@
                 <img src="{% static 'ProjectMatura.png' %}" style="max-width: 75px;max-height: 75px;border-radius: 50%;">
                 <li class="nav-item"><a class="nav-link" href="/main/konto">Moje konto</a></li>
                 <li class="nav-item"><a class="nav-link" id="buy">Kup kurs</a></li>
-                <button id="signout" class="btn btn-danger">Wyloguj się</button>
+                <form method="POST" action="{% url 'log_out' %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button id="signout" class="btn btn-danger" type="submit">Wyloguj się</button>
+                </form>
               </ul>
             </div>
           </div>
         </div>
     </nav>
+    <input type="hidden" id=mail value="{{ mail }}">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="{% static 'guest.js' %}"></script>

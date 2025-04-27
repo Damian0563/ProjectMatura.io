@@ -15,6 +15,12 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 def home(req):
     if(req.method=="GET"):
+        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
+            token = req.COOKIES['remember_token']
+            mail = postgresql.get_mail_from_token(token)
+            if mail:
+                req.session['id'] = postgresql.encode_id(mail)
+                return redirect('main')
         return render(req,'myapp/home.html')
     
 @ensure_csrf_cookie
@@ -37,10 +43,13 @@ def signIN(req):
     if req.method=="GET":
         return render(req,'myapp/signIN.html')
     elif req.method=="POST":
-        data=json.loads(req.body)
-        mail=data.get('mail')
-        password=data.get('password')
-        remember_me_checked=data.get('remember',False)
+        # data=json.loads(req.body)
+        # mail=data.get('mail')
+        # password=data.get('password')
+        # remember_me_checked=data.get('remember',False)
+        mail=req.POST.get('mail')
+        password=req.POST.get('password')
+        remember_me_checked=req.POST.get('remember')=='on'
         if(postgresql.check_credentials(mail,password)):
             id=postgresql.encode_id(mail)
             req.session['id']=id
@@ -55,9 +64,12 @@ def signIN(req):
                     httponly=True,
                     secure=True 
                 )
-            return JsonResponse({'status':200,'redirect_url': reverse('main')})
+            return response
+            #return JsonResponse({'status':200,'redirect_url': reverse('main')})
         else:
-            return JsonResponse({'status':404})
+            print("Logowanie nie powiodło się.")
+            return render(req,'myapp/signIN.html',{'error':True,'message':'Logowanie nie powiodło się.❌'})
+            #return JsonResponse({'status':404})
         
 def main(req):
     if 'id' in req.session:
@@ -71,11 +83,10 @@ def main(req):
             return redirect('home') 
     else:
         return redirect('home')
-    print(postgresql.is_subscription_active(mail))
     if postgresql.is_subscription_active(mail):
-        return render(req, 'myapp/full.html')
+        return render(req, 'myapp/full.html',{'mail': mail})
     else:
-        return render(req, 'myapp/guest.html')
+        return render(req, 'myapp/guest.html',{'mail': mail})
     
         
     
@@ -84,10 +95,10 @@ def log_out(req):
         req.session.flush() 
         remember_token = req.COOKIES.get('remember_token')
         if remember_token:
-            postgresql.delete_token(remember_token)
+            postgresql.delete_tokens(remember_token)
         response = redirect('signIN')
         response.delete_cookie('remember_token')
-        return JsonResponse({'ok':200})
+        return response
 
 
 def acc(req):
@@ -101,6 +112,7 @@ def create_checkout_session(req):
         mode='subscription',
         success_url='http://127.0.0.1:8000/main',
         cancel_url='http://127.0.0.1:8000/fail',
+        customer_email=data["mail"],
         line_items=[{
             "price": data["priceId"],
             "quantity": 1,
@@ -122,9 +134,12 @@ def stripe_webhook(req):
         session = event['data']['object']
         
         customer_id = session.get('customer')
+        if not customer_id:
+            return JsonResponse({'status': 400})
         subscription_id = session.get('subscription')
-        client_reference_id = session.get('client_reference_id')
-        postgresql.insert_payment("damian.realmadrid2005@gmail.com", customer_id, subscription_id)
+        customer = stripe.Customer.retrieve(customer_id)
+        customer_email = customer['email']
+        postgresql.insert_payment(customer_email, customer_id, subscription_id)
     return JsonResponse({'status': 200})
 def fail(req):
     return render(req,'myapp/fail.html')

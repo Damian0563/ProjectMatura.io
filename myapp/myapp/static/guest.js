@@ -17,27 +17,29 @@ document.addEventListener('DOMContentLoaded',()=>{
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
-    document.getElementById('signout').addEventListener('click',async()=>{
-        fetch('/main/log_out',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json',
-                'X-CSRFToken':csrftoken
-            },
-            credentials:'include',
-        })
-        .then(response=>{
-            if(response.ok) window.location.href='/'
-        })
-        .catch(e=>console.error(e))
-    })
+    // document.getElementById('signout').addEventListener('click',async()=>{
+    //     fetch('/main/log_out',{
+    //         method:"POST",
+    //         headers:{
+    //             'Content-Type':'application/json',
+    //             'X-CSRFToken':csrftoken
+    //         },
+    //         credentials:'include',
+    //     })
+    //     .then(response=>{
+    //         if(response.ok) window.location.href='/'
+    //     })
+    //     .catch(e=>console.error(e))
+    // })
 
     document.getElementById('buy').addEventListener('click',async()=>{
+        const mail=document.getElementById('email').value
         fetch('/main/create_checkout_session',{
             method:"POST",
             headers:{'Content-Type':'application/json','X-CSRFToken':csrftoken},
             body:JSON.stringify({
                 priceId:price,
+                mail:mail
             })
         }).then(response=>response.json())
         .then((data) => {
