@@ -26,6 +26,12 @@ def home(req):
 @ensure_csrf_cookie
 def signUP(req):
     if req.method=="GET":
+        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
+            token = req.COOKIES['remember_token']
+            email = postgresql.get_mail_from_token(token)
+            if email:
+                req.session['id'] = postgresql.encode_id(email)
+                return redirect('main')
         return render(req,'myapp/signUP.html')
     elif req.method=="POST":
         data = json.loads(req.body)
@@ -41,12 +47,14 @@ def signUP(req):
 @ensure_csrf_cookie
 def signIN(req):
     if req.method=="GET":
+        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
+            token = req.COOKIES['remember_token']
+            mail = postgresql.get_mail_from_token(token)
+            if mail:
+                req.session['id'] = postgresql.encode_id(mail)
+                return redirect('main')
         return render(req,'myapp/signIN.html')
     elif req.method=="POST":
-        # data=json.loads(req.body)
-        # mail=data.get('mail')
-        # password=data.get('password')
-        # remember_me_checked=data.get('remember',False)
         mail=req.POST.get('mail')
         password=req.POST.get('password')
         remember_me_checked=req.POST.get('remember')=='on'
@@ -64,12 +72,11 @@ def signIN(req):
                     httponly=True,
                     secure=True 
                 )
+            print("Zalogowano pomyślnie")
             return response
-            #return JsonResponse({'status':200,'redirect_url': reverse('main')})
         else:
-            print("Logowanie nie powiodło się.")
+            print("Niepoprawne dane logowania")
             return render(req,'myapp/signIN.html',{'error':True,'message':'Logowanie nie powiodło się.❌'})
-            #return JsonResponse({'status':404})
         
 def main(req):
     if 'id' in req.session:
