@@ -23,6 +23,7 @@ def home(req):
                 return redirect('main')
         return render(req,'myapp/home.html')
     
+
 @ensure_csrf_cookie
 def signUP(req):
     if req.method=="GET":
@@ -72,10 +73,8 @@ def signIN(req):
                     httponly=True,
                     secure=True 
                 )
-            print("Zalogowano pomyślnie")
             return response
         else:
-            print("Niepoprawne dane logowania")
             return render(req,'myapp/signIN.html',{'error':True,'message':'Logowanie nie powiodło się.❌'})
         
 def main(req):
@@ -111,8 +110,10 @@ def log_out(req):
 def acc(req):
     if req.method=="GET":
         mail=postgresql.decode_id(req.session.get('id'))
-        type="guest"
-        if postgresql.is_subscription_active(mail): type="full"
+        type=True
+        if postgresql.is_subscription_active(mail): type=False
+
+        print(type)
         return render(req,'myapp/account.html',{'mail': mail,'type':type})
 
 @ensure_csrf_cookie
