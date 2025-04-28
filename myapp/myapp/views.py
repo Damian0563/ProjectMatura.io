@@ -109,7 +109,11 @@ def log_out(req):
 
 
 def acc(req):
-    return render(req,'myapp/account.html')
+    if req.method=="GET":
+        mail=postgresql.decode_id(req.session.get('id'))
+        type="guest"
+        if postgresql.is_subscription_active(mail): type="full"
+        return render(req,'myapp/account.html',{'mail': mail,'type':type})
 
 @ensure_csrf_cookie
 def create_checkout_session(req):
@@ -139,7 +143,6 @@ def stripe_webhook(req):
         return HttpResponse(status=400)
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        
         customer_id = session.get('customer')
         if not customer_id:
             return JsonResponse({'status': 400})
@@ -147,6 +150,8 @@ def stripe_webhook(req):
         customer = stripe.Customer.retrieve(customer_id)
         customer_email = customer['email']
         postgresql.insert_payment(customer_email, customer_id, subscription_id)
+        mail.payment(customer_email)
     return JsonResponse({'status': 200})
+
 def fail(req):
     return render(req,'myapp/fail.html')
