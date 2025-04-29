@@ -15,6 +15,8 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 def home(req):
     if(req.method=="GET"):
+        if 'id' in req.session:
+            return redirect('main')
         if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
             token = req.COOKIES['remember_token']
             mail = postgresql.get_mail_from_token(token)
@@ -27,6 +29,7 @@ def home(req):
 @ensure_csrf_cookie
 def signUP(req):
     if req.method=="GET":
+        if 'id' in req.session: redirect('main')
         if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
             token = req.COOKIES['remember_token']
             email = postgresql.get_mail_from_token(token)
@@ -48,6 +51,7 @@ def signUP(req):
 @ensure_csrf_cookie
 def signIN(req):
     if req.method=="GET":
+        if 'id' in req.session: redirect('main')
         if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
             token = req.COOKIES['remember_token']
             mail = postgresql.get_mail_from_token(token)
@@ -112,8 +116,6 @@ def acc(req):
         mail=postgresql.decode_id(req.session.get('id'))
         type=True
         if postgresql.is_subscription_active(mail): type=False
-
-        print(type)
         return render(req,'myapp/account.html',{'mail': mail,'type':type})
 
 @ensure_csrf_cookie

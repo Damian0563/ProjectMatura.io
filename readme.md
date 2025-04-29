@@ -1,12 +1,20 @@
 ### ProjectMatura.io
 ProjectMatura.io is an e-learning platform with the aim to help Polish students pass their math matura exam.
-The aim is to take subscription fees, upload video content and store users in a database.
+The aim is to make quality educational content that are supported with top notch technologies. The goal is to
+provide continous service. 
+
+## Features
+- Subscription based monthly payments
+- Persistant remember me cookies
+- Responsiveness
+- User authorization
+- Confirmation emails
 
 ## Technologies in use
 - PostgresQL
 - Django
 - Bootstrap
-- Javascript, HTML
+- Javascript, HTML(Jinja2 templating language)
 - Docker
 - Stripe
 

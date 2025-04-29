@@ -11,7 +11,7 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 
-<body>
+<body class="bg-dark text-white">
     <style>
         #res{
             transition: 0.5s ease-in-out;
@@ -22,12 +22,12 @@
             color: red;
         }
     </style>
-    <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark" style="margin-bottom: 5%;">
+    <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark" style="margin-bottom: 0%;">
         <div class="container">
           <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <div class="offcanvas-body">
               <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
-                <li class="nav-item"><a class="nav-link" href="/main">Powrót</a></li>
+                <li class="nav-item"><a class="nav-link" href="/main">&lt; Powrót</a></li>
                 <img src="{% static 'ProjectMatura.webp' %}" style="max-width: 75px;max-height: 75px;border-radius: 50%;">
               </ul>
             </div>
@@ -35,60 +35,44 @@
         </div>
     </nav>
 
-    <!-- <div class="container mt-5 bg-dark text-white">
-        <h1 class="text-center">Moje konto</h1>
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-5 p-4">
-                <label for="email" class="form-label">Adres e-mail:</label>
-                <input type="email" class="form-control" id="mail" value="{{ mail }}" readonly>
-                {% if type %}
-                    <p>Kup kurs, aby otrzymać dostęp do wszystkich dostępnych treści na platformie ProjectMatura.io</p>
-                {% else %}
-                    <form method="POST" action="{% url '' %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button id="res" class="btn btn-danger" type="submit">Zrezygnuj z subskrypcji</button>
-                  </form>
-                {% endif %}
-            </div> 
-            
-            <div class="container">
-                <p>Dołącz do naszej społeczności discord</p>
-            </div>
-        </div>        
-    </div> -->
-    <div class="container my-5 p-5 rounded bg-dark text-white shadow-lg">
+    <div class="container p-3 rounded bg-dark text-white shadow-lg">
+        
+        <div class="d-flex justify-content-center mb-4">
+            <img src="{% static 'user.webp' %}" class="img-fluid rounded" style="max-width: 300px;max-height: 300px;">
+        </div>
         <h1 class="text-center mb-4">Moje konto</h1>
-    
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="mb-4">
+                <div class="mb-3">
                     <label for="email" class="form-label">Adres e-mail:</label>
                     <input type="email" class="form-control" id="mail" value="{{ mail }}" readonly>
                 </div>
     
-                {% if type %}
-                    <div class="alert alert-warning" role="alert">
-                        Kup kurs, aby otrzymać dostęp do wszystkich dostępnych treści na platformie <strong>ProjectMatura.io</strong>.
-                    </div>
-                {% else %}
-                    <form method="POST">
-                        {% csrf_token %}
-                        <button id="res" class="btn btn-danger w-100" type="submit">
-                            Zrezygnuj z subskrypcji
-                        </button>
-                    </form>
-                {% endif %}
-            </div>
-        </div>
+                <div class="d-grid gap-3 mt-5">
+                    <a href="https://discord.com/channels/1366385364209762386/1366385364675072071" 
+                       class="btn btn-primary btn-lg"
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                       Dołącz do naszej społeczności <strong>Discord</strong>!
+                    </a>
     
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6 text-center">
-                <div class="p-3 bg-secondary rounded">
-                    <p class="mb-0">Dołącz do naszej społeczności <strong>Discord</strong>!</p>
+                    {% if type %}
+                        <div class="alert alert-warning text-center" role="alert">
+                            Kup kurs, aby otrzymać dostęp do wszystkich dostępnych treści na platformie <strong>ProjectMatura.io</strong>.
+                        </div>
+                    {% else %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <button id="res" class="btn btn-danger btn-lg w-100" type="submit">
+                                Zrezygnuj z subskrypcji
+                            </button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+    
     
     
 
