@@ -34,6 +34,23 @@
           </div>
         </div>
     </nav>
+    
+    <div id="pop" class="position-fixed top-0 start-0 w-100 h-100 justify-content-center align-items-center" style="background-color: rgba(0,0,0,0.6); display: none; z-index: 1050;">
+        <div class="bg-dark text-white p-4 rounded shadow-lg" style="max-width: 500px; width: 90%;">
+            <p class="mb-4">
+                Czy na pewno chcesz zrezygnować z subskrypcji na platformie <strong>ProjectMatura.io</strong>?<br>
+                Automatycznie utracisz dostęp do wszystkich płatnych treści.
+            </p>
+            <div class="d-flex justify-content-end gap-3">
+                <form method="post" action="{% url 'resign' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">Tak</button>
+                </form>
+                <button class="btn btn-secondary" id="no">Nie</button>
+            </div>
+        </div>
+    </div>
+    
 
     <div class="container p-3 rounded bg-dark text-white shadow-lg">
         
@@ -61,12 +78,11 @@
                             Kup kurs, aby otrzymać dostęp do wszystkich dostępnych treści na platformie <strong>ProjectMatura.io</strong>.
                         </div>
                     {% else %}
-                        <form method="POST">
-                            {% csrf_token %}
-                            <button id="res" class="btn btn-danger btn-lg w-100" type="submit">
-                                Zrezygnuj z subskrypcji
-                            </button>
-                        </form>
+                        
+                        <button id="res" class="btn btn-danger btn-lg w-100">
+                            Zrezygnuj z subskrypcji
+                        </button>
+                        
                     {% endif %}
                 </div>
             </div>
@@ -78,7 +94,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'account.js' %}"></script>
 </body>
 
 

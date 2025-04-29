@@ -28,5 +28,6 @@ urlpatterns = [
     path('main/log_out', views.log_out, name='log_out'),
     path('main/create_checkout_session',views.create_checkout_session,name='create_checkout_session'),
     path('fail',views.fail,name='fail'),
-    path('webhook/', views.stripe_webhook, name='stripe-webhook')
+    path('webhook/', views.stripe_webhook, name='stripe-webhook'),
+    path('main/konto/resign',views.resign,name="resign")
 ]

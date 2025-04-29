@@ -134,6 +134,11 @@ def create_checkout_session(req):
     )
     return JsonResponse({'sessionId':checkout_session.id})
 
+@ensure_csrf_cookie
+def resign(req):
+    if req.method=='POST':
+        pass
+
 
 @csrf_exempt
 def stripe_webhook(req):
