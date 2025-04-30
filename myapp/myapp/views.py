@@ -118,13 +118,16 @@ def acc(req):
         if postgresql.is_subscription_active(mail): type=False
         return render(req,'myapp/account.html',{'mail': mail,'type':type})
 
+def success(req):
+    return render(req,'myapp/success.html')
+
 @ensure_csrf_cookie
 def create_checkout_session(req):
     data=json.loads(req.body)
     checkout_session=stripe.checkout.Session.create(
         payment_method_types=['card'],
         mode='subscription',
-        success_url='http://127.0.0.1:8000/main',
+        success_url='http://127.0.0.1:8000/success',
         cancel_url='http://127.0.0.1:8000/fail',
         customer_email=data["mail"],
         line_items=[{
@@ -137,7 +140,15 @@ def create_checkout_session(req):
 @ensure_csrf_cookie
 def resign(req):
     if req.method=='POST':
-        pass
+        email=postgresql.decode_id(req.session['id'])
+        sub_id=postgresql.get_subscription_id(email)
+        if sub_id!=None:
+            stripe.Subscription.delete(sub_id)
+            mail.cancelation(email)
+            postgresql.delete_payment(email)
+        else:
+            print('!!!!!!!!!!!!!!!')
+        return redirect('home')
 
 
 @csrf_exempt

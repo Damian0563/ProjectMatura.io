@@ -22,6 +22,14 @@ def is_subscription_active(mail):
         print(f"Stripe error: {e}")
         return False
 
+def get_subscription_id(mail):
+    return Payment.objects.get(mail=mail).stripe_subscription_id
+    
+def delete_payment(mail):
+    payment=Payment.objects.get(mail=mail)
+    payment.delete()
+    return
+
 def insert_payment(mail, stripe_customer_id, stripe_subscription_id):
     try:
         payment = Payment.objects.get(mail=mail)

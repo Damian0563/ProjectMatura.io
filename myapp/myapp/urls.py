@@ -29,5 +29,6 @@ urlpatterns = [
     path('main/create_checkout_session',views.create_checkout_session,name='create_checkout_session'),
     path('fail',views.fail,name='fail'),
     path('webhook/', views.stripe_webhook, name='stripe-webhook'),
-    path('main/konto/resign',views.resign,name="resign")
+    path('main/konto/resign',views.resign,name="resign"),
+    path('success',views.success,name='success')
 ]
