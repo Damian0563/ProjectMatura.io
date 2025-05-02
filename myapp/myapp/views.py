@@ -62,12 +62,12 @@ def signIN(req):
     elif req.method=="POST":
         mail=req.POST.get('mail')
         password=req.POST.get('password')
-        remember_me_checked=req.POST.get('remember')=='on'
+        remember_me_checked=req.POST.get('remember')
         if(postgresql.check_credentials(mail,password)):
             id=postgresql.encode_id(mail)
             req.session['id']=id
             response = redirect('main')
-            if remember_me_checked:
+            if remember_me_checked!=None:
                 postgresql.delete_tokens(mail)
                 token = postgresql.add_token(mail)
                 response.set_cookie(

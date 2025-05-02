@@ -21,6 +21,28 @@
             background-color: azure;
             color: red;
         }
+        @media(max-width:1316px){
+          *{
+            font-size: 0.8rem;
+          }
+        }
+
+        @media(max-width:885px){
+          *{
+            font-size: 0.75rem;
+          }
+        }
+
+        @media(max-width:800px){
+          *{
+            font-size: 0.65rem;
+          }
+        }
+        @media(max-width:630px){
+          *{
+            font-size: 0.6rem;
+          }
+        }
     </style>
     <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark">
         <div class="container">
@@ -38,63 +60,59 @@
           </div>
         </div>
     </nav>
-    
-
     <div class="container-fluid bg-dark text-white vh-100">
       <div class="row h-100">
-        <!-- Navigation -->
         <div class="col-3 bg-secondary p-3">
           <h5 class="mb-3">Rozdziały</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Wprowadzenie</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="intro">Wprowadzenie</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Funkcje</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="funckje">Funkcje</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Liczby rzeczywiste</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="reals">Liczby rzeczywiste</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Logarytmy</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="logs">Logarytmy</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Równania i nierówności</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="equa">Równania i nierówności</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Trygonometria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="trig">Trygonometria</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Geometria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="geo">Geometria</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Planimetria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="plani">Planimetria</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Kombinatoryka</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="combi">Kombinatoryka</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Prawdopodobieństwo</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="prob">Prawdopodobieństwo</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Okręgi</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="circ">Okręgi</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Ciągi</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="serie">Ciągi</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Zadania optymalizacyjne</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="opti">Zadania optymalizacyjne</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" href="#">Podsumowanie- arkusz od A do Z</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="review">Podsumowanie- arkusz od A do Z</a>
             </li>
           </ul>
         </div>
-    
-        
+
         <div class="col-9 p-5">
-          <h2></h2>
-          <p></p>
+          <h2>Main Content</h2>
+          <p>This is the larger area for your main application content.</p>
         </div>
       </div>
     </div>
