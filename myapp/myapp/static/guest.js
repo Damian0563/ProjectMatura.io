@@ -34,4 +34,43 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     })
 
+    document.getElementById('buy1').addEventListener('click',async()=>{
+        const mail=document.getElementById('mail').value
+        fetch('/main/create_checkout_session',{
+            method:"POST",
+            headers:{'Content-Type':'application/json','X-CSRFToken':csrftoken},
+            body:JSON.stringify({
+                priceId:price,
+                mail:mail
+            })
+        }).then(response=>response.json())
+        .then((data) => {
+            stripe.redirectToCheckout({sessionId:data.sessionId});
+        })
+
+    })
+
+    document.getElementById('no').addEventListener('click',()=>{
+        document.getElementById('pop').style.display="none"
+    })
+
+
+    document.getElementById('intro').addEventListener('click',()=>{
+        document.getElementById('content').innerHTML=''
+        document.getElementById('funckje').style.opacity=1
+        document.getElementById('intro').style.opacity=0.7
+        document.getElementById('head').innerText='Wprowadzenie'
+    })
+
+    document.getElementById('funckje').addEventListener('click',()=>{
+        document.getElementById('content').innerHTML=''
+        document.getElementById('intro').style.opacity=1;
+        document.getElementById('funckje').style.opacity=0.7
+        document.getElementById('head').innerText='Funkcje'
+    })
+
+    function display(){
+        document.getElementById('pop').style.display="flex"
+    }
+
 })

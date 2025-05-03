@@ -12,6 +12,11 @@
 </head>
 
 <body>
+    <script>
+      function display(){
+          document.getElementById('pop').style.display="flex"
+      }
+    </script>
     <style>
         #signout{
             transition: 0.5s ease-in-out;
@@ -81,7 +86,7 @@
               <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
                 <img src="{% static 'ProjectMatura.webp' %}" style="max-width: 75px;max-height: 75px;border-radius: 50%;">
                 <li class="nav-item"><a class="nav-link" href="/main/konto">Moje konto</a></li>
-                <li class="nav-item"><a class="nav-link" id="buy">Kup kurs</a></li>
+                <li class="nav-item"><a class="nav-link" id="buy" style="cursor:pointer;">Kup kurs</a></li>
                 <form method="POST" action="{% url 'log_out' %}" style="display:inline;">
                   {% csrf_token %}
                   <button id="signout" class="btn btn-danger" type="submit">Wyloguj się</button>
@@ -106,48 +111,69 @@
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="funckje">Funkcje</a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="reals">Liczby rzeczywiste<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="reals" onclick="display()">Liczby rzeczywiste<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="logs">Logarytmy<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="logs" onclick="display()">Logarytmy<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="equa">Równania i nierówności<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="equa" onclick="display()">Równania i nierówności<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="trig">Trygonometria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="trig" onclick="display()">Trygonometria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="geo">Geometria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="geo" onclick="display()">Geometria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="plani">Planimetria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="plani" onclick="display()">Planimetria<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="combi">Kombinatoryka<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="combi" onclick="display()">Kombinatoryka<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="prob">Prawdopodobieństwo<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="prob" onclick="display()">Prawdopodobieństwo<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="circ">Okręgi<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="circ" onclick="display()">Okręgi<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="serie">Ciągi<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="serie" onclick="display()">Ciągi<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="opti">Zadania optymalizacyjne<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="opti" onclick="display()">Zadania optymalizacyjne<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="review">Podsumowanie- arkusz od A do Z<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="review" onclick="display()">Podsumowanie- arkusz od A do Z<img src="{% static 'padlock.webp' %}" class="float-end lock"></a>
             </li>
           </ul>
         </div>
 
-        <div class="col-9 p-5">
-          <h2>Main Content</h2>
-          <p>This is the larger area for your main application content.</p>
+        <div id="pop" class="position-fixed top-0 start-0 w-100 h-100 justify-content-center align-items-center" style="background-color: rgba(0,0,0,0.6); display: none; z-index: 1050;">
+          <div class="bg-dark text-white p-4 rounded shadow-lg" style="max-width: 500px; width: 90%;">
+              <p class="mb-4">
+                  Aby uzyskać dostęp do tej treści należy kupić kurs.<br> Czy chciałbyś zrobić to teraz?
+              </p>
+              <div class="d-flex justify-content-center gap-3">
+                  <button class="btn btn-primary" id="buy1">Tak</button>
+                  <button class="btn btn-secondary" id="no">Nie</button>
+              </div>
+          </div>
         </div>
+
+        <div class="col-9 p-5 bg-dark rounded shadow-sm" id="main">
+          <h2 id="head" class="mb-4 text-center text-white fw-bold">Matura? Nic trudnego!</h2>
+          <div class="d-flex flex-column align-items-center gap-3" id="content">
+            <div class="p-3 bg-white rounded border w-50 text-center" style="color: black;">Dokładnie opracowane zagadnienia</div>
+            <span style='font-size:20px;'>&#8595;</span>
+            <div class="p-3 bg-white rounded border w-50 text-center" style="color: black;">Sumienne przygotowanie</div>
+            <span style='font-size:20px;'>&#8595;</span>
+            <div class="p-3 bg-white rounded border w-50 text-center" style="color: black;">Przerabianie arkuszy z ubiegłych lat</div>
+            <span style='font-size:20px;'>&#8595;</span>
+            <div class="p-3 bg-white rounded border w-50 text-center text-success fw-semibold">Sukces</div>
+          </div>
+        </div>
+        
       </div>
     </div>
     
