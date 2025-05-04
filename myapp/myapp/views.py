@@ -26,6 +26,9 @@ def home(req):
         return render(req,'myapp/home.html')
     
 
+def expired(req):
+    return render(req,'myapp/session_expired.html')
+
 @ensure_csrf_cookie
 def signUP(req):
     if req.method=="GET":
@@ -90,9 +93,9 @@ def main(req):
         if mail:
             req.session['id'] = postgresql.encode_id(mail)
         else:
-            return redirect('home') 
+            return redirect('expired') 
     else:
-        return redirect('home')
+        return redirect('expired')
     if postgresql.is_subscription_active(mail):
         return render(req, 'myapp/full.html',{'mail': mail})
     else:
@@ -104,7 +107,7 @@ def log_out(req):
     if req.method=='POST':
         req.session.flush() 
         remember_token = req.COOKIES.get('remember_token')
-        if remember_token:
+        if remember_token!=None:
             postgresql.delete_tokens(remember_token)
         response = redirect('signIN')
         response.delete_cookie('remember_token')
@@ -113,10 +116,19 @@ def log_out(req):
 
 def acc(req):
     if req.method=="GET":
-        mail=postgresql.decode_id(req.session.get('id'))
-        type=True
-        if postgresql.is_subscription_active(mail): type=False
-        return render(req,'myapp/account.html',{'mail': mail,'type':type})
+        if 'id' in req.session:
+            mail=postgresql.decode_id(req.session.get('id'))
+            type=True
+            if postgresql.is_subscription_active(mail): type=False
+            return render(req,'myapp/account.html',{'mail': mail,'type':type})
+        else:
+            token = req.COOKIES['remember_token']
+            if token!=None:
+                mail=postgresql.get_mail_from_token(token)
+                type=True
+                if postgresql.is_subscription_active(mail): type=False
+                return render(req,'myapp/account.html',{'mail': mail,'type':type})
+        return redirect('expired')
 
 def success(req):
     return render(req,'myapp/success.html')

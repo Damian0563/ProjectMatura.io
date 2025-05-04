@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ProjectMatura.io</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    {% load static %}
+    <link rel="icon" type="image/webp" href="{% static 'ProjectMatura.webp' %}">
+</head>
+
+<body class="bg-dark text-white">
+
+    <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark" style="margin-bottom: 0%;">
+        <div class="container">
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-body">
+              <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
+                <li class="nav-item"><a class="nav-link" href="/main">&lt; Powrót</a></li>
+                <img src="{% static 'ProjectMatura.webp' %}" style="max-width: 75px;max-height: 75px;border-radius: 50%;">
+              </ul>
+            </div>
+          </div>
+        </div>
+    </nav>
+    
+    <div class="container p-3 rounded bg-dark text-white shadow-lg">
+        <div class="d-flex justify-content-center mb-4">
+            <img src="{% static 'session.webp' %}" class="img-fluid rounded" style="max-width: 300px;max-height: 300px;">
+        </div>
+        <h1 class="text-center mb-4">Sesja wygasła z powodu nieaktywności.</h1>
+    </div>
+    
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

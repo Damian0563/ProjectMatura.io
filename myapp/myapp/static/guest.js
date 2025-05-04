@@ -60,6 +60,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById('funckje').style.opacity=1
         document.getElementById('intro').style.opacity=0.7
         document.getElementById('head').innerText='Wprowadzenie'
+        const div = document.createElement('div');
+        div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
+        const video = document.createElement('video');
+        video.setAttribute('src', "{% static 'introduction.avif' %}");
+        video.setAttribute('controls', '');
+        video.classList.add("w-100","h-100")
+        video.style.objectFit='cover'
+        div.appendChild(video);
+        document.getElementById('content').appendChild(div);
     })
 
     document.getElementById('funckje').addEventListener('click',()=>{
@@ -67,10 +76,54 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById('intro').style.opacity=1;
         document.getElementById('funckje').style.opacity=0.7
         document.getElementById('head').innerText='Funkcje'
+        const div = document.createElement('div');
+        div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
+        const video = document.createElement('video');
+        video.setAttribute('src', "{% static 'funkcje.avif' %}");
+        video.setAttribute('controls', '');
+        video.classList.add("w-100","h-100")
+        video.style.objectFit='cover'
+        div.appendChild(video);
+        document.getElementById('content').appendChild(div);
     })
 
-    function display(){
-        document.getElementById('pop').style.display="flex"
-    }
+    function init(){
+        document.getElementById('head').innerText="Matura? Nic trudnego!"
+        div1=document.createElement('div')
+        div1.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div1.style.color='black'
+        div1.innerText='Dokładnie opracowane zagadnienia'
+        span1=document.createElement('span')
+        span1.style.fontSize="20px"
+        span1.innerHTML="&#8595";
 
+        div2=document.createElement('div')
+        div2.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div2.style.color='black'
+        div2.innerText='Sumienne przygotowanie'
+        span2=document.createElement('span')
+        span2.style.fontSize="20px"
+        span2.innerHTML="&#8595";
+
+        div4=document.createElement('div')
+        div4.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div4.style.color='black'
+        div4.innerText='Przerabianie arkuszy z ubiegłych lat'
+        span4=document.createElement('span')
+        span4.style.fontSize="20px"
+        span4.innerHTML="&#8595";
+
+        div3=document.createElement('div')
+        div3.classList.add("p-3","bg-white","rounded","border","w-50","text-center","text-success","fw-semibold")
+        div3.innerText='Sukces'
+
+        document.getElementById('content').appendChild(div1)
+        document.getElementById('content').appendChild(span1)
+        document.getElementById('content').appendChild(div2)
+        document.getElementById('content').appendChild(span2)
+        document.getElementById('content').appendChild(div4)
+        document.getElementById('content').appendChild(span4)
+        document.getElementById('content').appendChild(div3)
+    }
+    init()
 })
