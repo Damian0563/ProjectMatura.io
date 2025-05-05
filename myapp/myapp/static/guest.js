@@ -55,15 +55,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 
 
-    document.getElementById('intro').addEventListener('click',()=>{
+    document.getElementById('Wprowadzenie').addEventListener('click',()=>{
         document.getElementById('content').innerHTML=''
-        document.getElementById('funckje').style.opacity=1
-        document.getElementById('intro').style.opacity=0.7
+        document.getElementById('Funkcje').style.opacity=1
+        document.getElementById('Wprowadzenie').style.opacity=0.7
         document.getElementById('head').innerText='Wprowadzenie'
         const div = document.createElement('div');
         div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
         const video = document.createElement('video');
-        video.setAttribute('src', "{% static 'introduction.avif' %}");
+        video.setAttribute('src', "{% static 'Wprowadzenie.avif' %}");
         video.setAttribute('controls', '');
         video.classList.add("w-100","h-100")
         video.style.objectFit='cover'
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById('content').appendChild(div);
     })
 
-    document.getElementById('funckje').addEventListener('click',()=>{
+    document.getElementById('Funkcje').addEventListener('click',()=>{
         document.getElementById('content').innerHTML=''
         document.getElementById('intro').style.opacity=1;
         document.getElementById('funckje').style.opacity=0.7
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const div = document.createElement('div');
         div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
         const video = document.createElement('video');
-        video.setAttribute('src', "{% static 'funkcje.avif' %}");
+        video.setAttribute('src', "{% static 'Funkcje.avif' %}");
         video.setAttribute('controls', '');
         video.classList.add("w-100","h-100")
         video.style.objectFit='cover'

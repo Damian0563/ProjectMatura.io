@@ -32,6 +32,75 @@ document.addEventListener('DOMContentLoaded',()=>{
         })
         .catch(e=>console.error(e))
     })
+    const ids=['Wprowadzenie','Fukcje','LiczbyR','Logarytmy','Równania','Trygonometria','Geometria','Planimetria','Kombinatoryka','Prawdopodobieństwo','Okręgi','Ciągi','ZadaniaO','Podsumowanie']
+    const size=ids.length
+    ids.forEach(id=>{
+        document.getElementById(id).addEventListener('click',()=>{
+            for(let i=0;i<size;i++){
+                if(ids[i]!=id){
+                    document.getElementById(ids[i]).style.opacity=1;
+                }
+            }
+            document.getElementById(id).style.opacity=0.7;
+            document.getElementById('content').innerHTML='';
+            if(id=="LiczbyR") document.getElementById('head').innerText="Liczby Rzeczywiste";
+            else if(id=="ZadaniaO") document.getElementById('head').innerText="Zadania optymalizacyjne";
+            else if(id=="Równania") document.getElementById('head').innerText="Równania i nierówności";
+            else document.getElementById('head').innerText=id;
+            const div = document.createElement('div');
+            div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
+            const video = document.createElement('video');
+            video.setAttribute('src', `{% static ${id}.avif' %}`);
+            video.setAttribute('controls', '');
+            video.classList.add("w-100","h-100")
+            video.style.objectFit='cover'
+            div.appendChild(video);
+            document.getElementById('content').appendChild(div);
+        })
+    })
 
-    
+
+
+
+    function init(){
+        document.getElementById('head').innerText="Matura? Nic trudnego!"
+        div1=document.createElement('div')
+        div1.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div1.style.color='black'
+        div1.innerText='Dokładnie opracowane zagadnienia'
+        span1=document.createElement('span')
+        span1.style.fontSize="20px"
+        span1.innerHTML="&#8595";
+
+        div2=document.createElement('div')
+        div2.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div2.style.color='black'
+        div2.innerText='Sumienne przygotowanie'
+        span2=document.createElement('span')
+        span2.style.fontSize="20px"
+        span2.innerHTML="&#8595";
+
+        div4=document.createElement('div')
+        div4.classList.add("p-3","bg-white","rounded","border","w-50","text-center")
+        div4.style.color='black'
+        div4.innerText='Przerabianie arkuszy z ubiegłych lat'
+        span4=document.createElement('span')
+        span4.style.fontSize="20px"
+        span4.innerHTML="&#8595";
+
+        div3=document.createElement('div')
+        div3.classList.add("p-3","bg-white","rounded","border","w-50","text-center","text-success","fw-semibold")
+        div3.innerText='Sukces'
+
+        document.getElementById('content').appendChild(div1)
+        document.getElementById('content').appendChild(span1)
+        document.getElementById('content').appendChild(div2)
+        document.getElementById('content').appendChild(span2)
+        document.getElementById('content').appendChild(div4)
+        document.getElementById('content').appendChild(span4)
+        document.getElementById('content').appendChild(div3)
+    }
+    init()
+
+
 })
