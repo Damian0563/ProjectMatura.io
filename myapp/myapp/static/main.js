@@ -16,52 +16,6 @@ document.addEventListener('DOMContentLoaded',()=>{
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
-
-    document.getElementById('signout').addEventListener('click',async()=>{
-        fetch('/main/log_out',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json',
-                'X-CSRFToken':csrftoken
-            },
-            credentials:'include',
-        })
-        .then(response=>{
-            console.log(response)
-            if(response.ok) window.location.href='/'
-        })
-        .catch(e=>console.error(e))
-    })
-    const ids=['Wprowadzenie','Fukcje','LiczbyR','Logarytmy','Równania','Trygonometria','Geometria','Planimetria','Kombinatoryka','Prawdopodobieństwo','Okręgi','Ciągi','ZadaniaO','Podsumowanie']
-    const size=ids.length
-    ids.forEach(id=>{
-        document.getElementById(id).addEventListener('click',()=>{
-            for(let i=0;i<size;i++){
-                if(ids[i]!=id){
-                    document.getElementById(ids[i]).style.opacity=1;
-                }
-            }
-            document.getElementById(id).style.opacity=0.7;
-            document.getElementById('content').innerHTML='';
-            if(id=="LiczbyR") document.getElementById('head').innerText="Liczby Rzeczywiste";
-            else if(id=="ZadaniaO") document.getElementById('head').innerText="Zadania optymalizacyjne";
-            else if(id=="Równania") document.getElementById('head').innerText="Równania i nierówności";
-            else document.getElementById('head').innerText=id;
-            const div = document.createElement('div');
-            div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
-            const video = document.createElement('video');
-            video.setAttribute('src', `{% static ${id}.avif' %}`);
-            video.setAttribute('controls', '');
-            video.classList.add("w-100","h-100")
-            video.style.objectFit='cover'
-            div.appendChild(video);
-            document.getElementById('content').appendChild(div);
-        })
-    })
-
-
-
-
     function init(){
         document.getElementById('head').innerText="Matura? Nic trudnego!"
         div1=document.createElement('div')
@@ -91,7 +45,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         div3=document.createElement('div')
         div3.classList.add("p-3","bg-white","rounded","border","w-50","text-center","text-success","fw-semibold")
         div3.innerText='Sukces'
-
+        document.getElementById('done').innerHTML=''
         document.getElementById('content').appendChild(div1)
         document.getElementById('content').appendChild(span1)
         document.getElementById('content').appendChild(div2)
@@ -101,6 +55,56 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById('content').appendChild(div3)
     }
     init()
+    document.getElementById('signout').addEventListener('click',async()=>{
+        fetch('/main/log_out',{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken
+            },
+            credentials:'include',
+        })
+        .then(response=>{
+            console.log(response)
+            if(response.ok) window.location.href='/'
+        })
+        .catch(e=>console.error(e))
+    })
+    const ids=['Wprowadzenie','Funkcje','LiczbyR','Logarytmy','Równania','Trygonometria','Geometria','Planimetria','Kombinatoryka','Prawdopodobieństwo','Okręgi','Ciągi','ZadaniaO','Podsumowanie']
+    const size=ids.length
+    ids.forEach(id=>{
+        document.getElementById(id).addEventListener('click',()=>{
+            for(let i=0;i<size;i++){
+                if(ids[i]!=id){
+                    document.getElementById(ids[i]).style.opacity=1;
+                }
+            }
+            document.getElementById(id).style.opacity=0.7;
+            document.getElementById('content').innerHTML='';
+            if(id=="LiczbyR") document.getElementById('head').innerText="Liczby Rzeczywiste";
+            else if(id=="ZadaniaO") document.getElementById('head').innerText="Zadania optymalizacyjne";
+            else if(id=="Równania") document.getElementById('head').innerText="Równania i nierówności";
+            else document.getElementById('head').innerText=id;
+            
+            document.getElementById('done').innerText='Oznacz jako wykonane'
+
+            const div = document.createElement('div');
+            div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
+            const video = document.createElement('video');
+            video.setAttribute('src', `{% static ${id}.avif' %}`);
+            video.setAttribute('controls', '');
+            video.classList.add("w-100","h-100")
+            video.style.objectFit='cover'
+            div.appendChild(video);
+           
+            document.getElementById('content').appendChild(div);
+        })
+    })
+
+
+
+
+    
 
 
 })
