@@ -158,8 +158,6 @@ def resign(req):
             stripe.Subscription.delete(sub_id)
             mail.cancelation(email)
             postgresql.delete_payment(email)
-        else:
-            print('!!!!!!!!!!!!!!!')
         return redirect('home')
 
 
@@ -186,3 +184,17 @@ def stripe_webhook(req):
 
 def fail(req):
     return render(req,'myapp/fail.html')
+
+def progress(req):
+    course=req.course
+    postgresql.save_course(course)
+    return JsonResponse({'status':200})
+
+def get_progress(req):
+    if 'id' in req.session:
+        mail=postgresql.decode_id(req.session.get('id'))
+        if(postgresql.find(mail)): return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+    elif req.COOKIES['remember_token']!=None:
+        mail=postgresql.get_mail_from_token(req.COOKIES['remember_token'])
+        if(postgresql.find(mail)): return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+    return JsonResponse({'status':404})

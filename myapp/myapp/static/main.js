@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         div3=document.createElement('div')
         div3.classList.add("p-3","bg-white","rounded","border","w-50","text-center","text-success","fw-semibold")
         div3.innerText='Sukces'
-        document.getElementById('done').innerHTML=''
+        document.getElementById('dummy').style.display='none'
         document.getElementById('content').appendChild(div1)
         document.getElementById('content').appendChild(span1)
         document.getElementById('content').appendChild(div2)
@@ -85,9 +85,10 @@ document.addEventListener('DOMContentLoaded',()=>{
             else if(id=="ZadaniaO") document.getElementById('head').innerText="Zadania optymalizacyjne";
             else if(id=="Równania") document.getElementById('head').innerText="Równania i nierówności";
             else document.getElementById('head').innerText=id;
-            
-            document.getElementById('done').innerText='Oznacz jako wykonane'
-
+            if(document.getElementById(`check${id}`)===null){
+                document.getElementById('done').innerText='Oznacz jako wykonane'
+                document.getElementById('dummy').style.display='flex'
+            }
             const div = document.createElement('div');
             div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")
             const video = document.createElement('video');
@@ -96,8 +97,18 @@ document.addEventListener('DOMContentLoaded',()=>{
             video.classList.add("w-100","h-100")
             video.style.objectFit='cover'
             div.appendChild(video);
-           
             document.getElementById('content').appendChild(div);
+            document.getElementById('done').addEventListener('click',()=>{
+                document.getElementById('done').style.setProperty("display","none","important")
+                document.getElementById(`check${id}`).style.setProperty("display","flex")
+                fetch('/progress',{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json'},
+                    body:{
+                        course:id
+                    }
+                }).catch(e=>console.error(e))
+            })
         })
     })
 

@@ -31,5 +31,6 @@ urlpatterns = [
     path('webhook/', views.stripe_webhook, name='stripe-webhook'),
     path('main/konto/resign',views.resign,name="resign"),
     path('success',views.success,name='success'),
-    path('expired',views.expired,name="expired")
+    path('expired',views.expired,name="expired"),
+    path('progress',views.progress,name='progress')
 ]

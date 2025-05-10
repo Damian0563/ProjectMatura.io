@@ -79,6 +79,12 @@ def decode_id(id):
     return result
 
 
+def get_progress(mail):
+    pass
+
+def save_course(course):
+    pass
+
 def get_status(mail):
     try:
         user = User.objects.get(mail=mail)

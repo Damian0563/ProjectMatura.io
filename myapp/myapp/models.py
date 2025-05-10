@@ -14,3 +14,8 @@ class Token(models.Model):
     mail=models.CharField(max_length=50)
     token=models.CharField(max_length=100)
     waranty=models.FloatField()
+
+class UserProgress(models.Model):
+    mail=models.CharField(max_length=50)
+    courses=models.CharField(max_length=30)
+

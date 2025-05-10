@@ -21,6 +21,14 @@
             background-color: azure;
             color: red;
         }
+        #done{
+          transition: 0.5s ease-in-out;
+        }
+        #done:hover{
+            transform: scale(1.05);
+            background-color: white;
+            color: green;
+        }
         @media(max-width:1316px){
           *{
             font-size: 0.8rem;
@@ -66,60 +74,56 @@
           <h5 class="mb-3">Rozdziały</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Wprowadzenie">Wprowadzenie</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Wprowadzenie">Wprowadzenie<img id="checkWprowadzenie" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Funkcje">Funkcje</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Funkcje">Funkcje<img id="checkFunkcje" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="LiczbyR">Liczby rzeczywiste</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="LiczbyR">Liczby rzeczywiste<img id="checkLiczbyR" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Logarytmy">Logarytmy</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Logarytmy">Logarytmy<img id="checkLogarytmy" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Równania">Równania i nierówności</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Równania">Równania i nierówności<img id="checkRównania" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Trygonometria">Trygonometria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Trygonometria">Trygonometria<img id="checkTrygonometria" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Geometria">Geometria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Geometria">Geometria<img id="checkGeometria" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Planimetria">Planimetria</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Planimetria">Planimetria<img id="checkPlanimetria" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Kombinatoryka">Kombinatoryka</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Kombinatoryka">Kombinatoryka<img id="checkKombinatoryka" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Prawdopodobieństwo">Prawdopodobieństwo</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Prawdopodobieństwo">Prawdopodobieństwo<img id="checkPrawdopodobieństwo" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Okręgi">Okręgi</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Okręgi">Okręgi<img id="checkOkręgi" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Ciągi">Ciągi</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Ciągi">Ciągi<img id="checkCiągi" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="ZadaniaO">Zadania optymalizacyjne</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="ZadaniaO">Zadania optymalizacyjne<img id="checkZadaniaO" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
             <li class="nav-item mb-2">
-              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Podsumowanie">Podsumowanie- arkusz od A do Z</a>
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Podsumowanie">Podsumowanie- arkusz od A do Z<img id="checkPodsumowanie" style="width:15px;height: 15px;" class="float-end lock" style="display: none;"  src="{% static 'check.webp' %}"></a>
             </li>
           </ul>
         </div>
 
         <div class="col-9 p-5 bg-dark rounded shadow-sm" id="main">
-          <!-- <div id="wrapper" class='d-flex justify-content-between align-items-center w-100 mb-3'>
-            <h2 id="head" class="mb-4 text-center text-white fw-bold"></h2>
-            <div id="doneRef" class="d-flex justify-content-center mt-4">
-              <button id="done" class="btn btn-success px-4 py-2 rounded-pill shadow">Oznacz jako wykonane</button>
-            </div>
-          </div> -->
           <div id="wrapper" class="d-flex justify-content-between align-items-center w-100 mb-3">
             <h2 id="head" class="mb-0 text-white fw-bold"></h2>
-            <button id="done" class="btn btn-success px-4 py-2 rounded-pill shadow">Oznacz jako wykonane</button>
+            <div id="dummy">
+              <button id="done" class="btn btn-success px-4 py-2 shadow">Oznacz jako wykonane</button>
+            </div>
           </div>
           <div class="d-flex flex-column align-items-center gap-3" id="content">
           </div>
