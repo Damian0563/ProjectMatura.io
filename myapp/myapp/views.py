@@ -185,8 +185,11 @@ def stripe_webhook(req):
 def fail(req):
     return render(req,'myapp/fail.html')
 
+@ensure_csrf_cookie
 def progress(req):
-    course=req.course
+    data = json.loads(req.body)
+    course = data.get('course')
+    print(course)
     postgresql.save_course(course)
     return JsonResponse({'status':200})
 
