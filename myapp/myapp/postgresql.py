@@ -1,7 +1,7 @@
 import bcrypt#type: ignore
 import time
 from uuid import uuid4
-from .models import User, Token, Payment
+from .models import User, Token, Payment, UserProgress
 import stripe
 import os
 from dotenv import load_dotenv
@@ -80,10 +80,19 @@ def decode_id(id):
 
 
 def get_progress(mail):
-    pass
+    try:
+        return [progress.courses for progress in UserProgress.objects.filter(mail=mail)]
+    except UserProgress.DoesNotExist:
+        return None
 
-def save_course(course):
-    pass
+def save_course(mail,course):
+    try:
+        past=UserProgress.objects.get(mail=mail,courses=course)
+        past.delete()
+    except UserProgress.DoesNotExist:
+        pass
+    UserProgress.objects.create(mail=mail,courses=course)
+    return
 
 def get_status(mail):
     try:

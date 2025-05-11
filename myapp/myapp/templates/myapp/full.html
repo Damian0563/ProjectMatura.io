@@ -73,48 +73,132 @@
         <div class="col-3 bg-secondary p-3">
           <h5 class="mb-3">Rozdziały</h5>
           <ul class="nav flex-column">
+            {% if "Wprowadzenie" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Wprowadzenie">Wprowadzenie<img id="checkWprowadzenie" style="width:15px;height: 15px;display: none;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Wprowadzenie" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Wprowadzenie">Wprowadzenie<img id="checkWprowadzenie" style="width:15px;height: 15px" class="float-end lock"  src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Funkcje" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Funkcje">Funkcje<img id="checkFunkcje" style="width:15px;height: 15px;display: none;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Funkcje" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Funkcje">Funkcje<img id="checkFunkcje" style="width:15px;height: 15px;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "LiczbyR" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="LiczbyR">Liczby rzeczywiste<img id="checkLiczbyR" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "LiczbyR" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="LiczbyR">Liczby rzeczywiste<img id="checkLiczbyR" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Logarytmy" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Logarytmy">Logarytmy<img id="checkLogarytmy" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Logarytmy" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Logarytmy">Logarytmy<img id="checkLogarytmy" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Równania" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Równania">Równania i nierówności<img id="checkRównania" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Równania" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Równania">Równania i nierówności<img id="checkRównania" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Trygonometria" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Trygonometria">Trygonometria<img id="checkTrygonometria" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Trygonometria" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Trygonometria">Trygonometria<img id="checkTrygonometria" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Geometria" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Geometria">Geometria<img id="checkGeometria" style="width:15px;height: 15px;display: none;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Geometria" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Geometria">Geometria<img id="checkGeometria" style="width:15px;height: 15px;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Planimetria" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Planimetria">Planimetria<img id="checkPlanimetria" style="width:15px;height: 15px;display: none;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Planimetria" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Planimetria">Planimetria<img id="checkPlanimetria" style="width:15px;height: 15px;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Kombinatoryka" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Kombinatoryka">Kombinatoryka<img id="checkKombinatoryka" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Kombinatoryka" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Kombinatoryka">Kombinatoryka<img id="checkKombinatoryka" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Prawdopodobieństwo" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Prawdopodobieństwo">Prawdopodobieństwo<img id="checkPrawdopodobieństwo" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Prawdopodobieństwo" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Prawdopodobieństwo">Prawdopodobieństwo<img id="checkPrawdopodobieństwo" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Okręgi" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Okręgi">Okręgi<img id="checkOkręgi" style="width:15px;height: 15px;display: none;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Okręgi" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Okręgi">Okręgi<img id="checkOkręgi" style="width:15px;height: 15px;" class="float-end lock"  src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Ciągi" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Ciągi">Ciągi<img id="checkCiągi" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Ciągi" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Ciągi">Ciągi<img id="checkCiągi" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "ZadaniaO" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="ZadaniaO">Zadania optymalizacyjne<img id="checkZadaniaO" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "ZadaniaO" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="ZadaniaO">Zadania optymalizacyjne<img id="checkZadaniaO" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
+            {% if "Podsumowanie" not in courses %}
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Podsumowanie">Podsumowanie- arkusz od A do Z<img id="checkPodsumowanie" style="width:15px;height: 15px;display: none;" class="float-end lock" src="{% static 'check.webp' %}"></a>
             </li>
+            {% elif "Podsumowanie" in courses %}
+            <li class="nav-item mb-2">
+              <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Podsumowanie">Podsumowanie- arkusz od A do Z<img id="checkPodsumowanie" style="width:15px;height: 15px;" class="float-end lock" src="{% static 'check.webp' %}"></a>
+            </li>
+            {% endif %}
           </ul>
         </div>
 

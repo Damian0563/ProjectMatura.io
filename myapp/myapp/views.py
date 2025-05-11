@@ -97,6 +97,10 @@ def main(req):
     else:
         return redirect('expired')
     if postgresql.is_subscription_active(mail):
+        courses=postgresql.get_progress(mail)
+        print(courses)
+        if courses!=None:
+            return render(req, 'myapp/full.html',{'mail': mail,'courses':courses})
         return render(req, 'myapp/full.html',{'mail': mail})
     else:
         return render(req, 'myapp/guest.html',{'mail': mail})
@@ -189,15 +193,32 @@ def fail(req):
 def progress(req):
     data = json.loads(req.body)
     course = data.get('course')
-    print(course)
-    postgresql.save_course(course)
-    return JsonResponse({'status':200})
+    if 'id' in req.session:
+        mail=postgresql.decode_id(req.session.get('id'))
+        if(postgresql.find(mail)):
+            postgresql.save_course(mail,course)
+            return JsonResponse({'status':200})
+    elif req.COOKIES['remember_token']!=None:
+        mail=postgresql.get_mail_from_token(req.COOKIES['remember_token'])
+        if(postgresql.find(mail)):
+            postgresql.save_course(mail,course)
+            return JsonResponse({'status':200})
+    return JsonResponse({'status':404})
 
 def get_progress(req):
     if 'id' in req.session:
         mail=postgresql.decode_id(req.session.get('id'))
-        if(postgresql.find(mail)): return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+        
+        if(postgresql.find(mail)): 
+            content=postgresql.get_progress(mail)
+            if content!=None:
+                return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+            return JsonResponse({'status':200})
     elif req.COOKIES['remember_token']!=None:
         mail=postgresql.get_mail_from_token(req.COOKIES['remember_token'])
-        if(postgresql.find(mail)): return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+        if(postgresql.find(mail)): 
+            content=postgresql.get_progress(mail)
+            if content!=None:
+                return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
+            return JsonResponse({'status':200})
     return JsonResponse({'status':404})
