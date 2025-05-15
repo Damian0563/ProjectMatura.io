@@ -85,11 +85,12 @@ document.addEventListener('DOMContentLoaded',()=>{
             else if(id=="ZadaniaO") document.getElementById('head').innerText="Zadania optymalizacyjne";
             else if(id=="Równania") document.getElementById('head').innerText="Równania i nierówności";
             else document.getElementById('head').innerText=id;
-            console.log(document.getElementById(`check${id}`).style.display==='none')
             if(document.getElementById(`check${id}`).style.display==='none'){
                 document.getElementById('done').style.setProperty("display","flex",'important')
                 document.getElementById('done').style.setProperty('innerText','Oznacz jako wykonane','important')
                 document.getElementById('dummy').style.setProperty('display','flex','important')
+            }else{
+                document.getElementById('done').style.setProperty("display","none",'important')
             }
             const div = document.createElement('div');
             div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")

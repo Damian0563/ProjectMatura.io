@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     document.getElementById('Funkcje').addEventListener('click',()=>{
         document.getElementById('content').innerHTML=''
-        document.getElementById('intro').style.opacity=1;
-        document.getElementById('funckje').style.opacity=0.7
+        document.getElementById('Wprowadzenie').style.opacity=1;
+        document.getElementById('Funkcje').style.opacity=0.7
         document.getElementById('head').innerText='Funkcje'
         const div = document.createElement('div');
         div.classList.add("ratio","ratio-16x9","shadow-lg","rounded","overflow-hidden")

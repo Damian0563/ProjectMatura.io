@@ -122,16 +122,21 @@ def acc(req):
     if req.method=="GET":
         if 'id' in req.session:
             mail=postgresql.decode_id(req.session.get('id'))
-            type=True
-            if postgresql.is_subscription_active(mail): type=False
-            return render(req,'myapp/account.html',{'mail': mail,'type':type})
+            if postgresql.find(mail):
+                type=True
+                if postgresql.is_subscription_active(mail):
+                    progress=round(len(postgresql.get_progress(mail))*100/14)
+                    type=False
+                    return render(req,'myapp/account.html',{'mail': mail,'type':type,'progress':progress})
+                return render(req,'myapp/account.html',{'mail': mail,'type':type,'progress':0})
         else:
             token = req.COOKIES['remember_token']
             if token!=None:
                 mail=postgresql.get_mail_from_token(token)
-                type=True
-                if postgresql.is_subscription_active(mail): type=False
-                return render(req,'myapp/account.html',{'mail': mail,'type':type})
+                if postgresql.find(mail):
+                    type=True
+                    if postgresql.is_subscription_active(mail): type=False
+                    return render(req,'myapp/account.html',{'mail': mail,'type':type})
         return redirect('expired')
 
 def success(req):

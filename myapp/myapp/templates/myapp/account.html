@@ -21,6 +21,7 @@
             background-color: azure;
             color: red;
         }
+        /* stylelint-disable */
     </style>
     <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark" style="margin-bottom: 0%;">
         <div class="container">
@@ -50,45 +51,48 @@
             </div>
         </div>
     </div>
-    
-
-    <div class="container p-3 rounded bg-dark text-white shadow-lg">
-        
+    <div class="container p-3 rounded bg-dark text-white shadow-lg" style="max-width: 100%;">
         <div class="d-flex justify-content-center mb-4">
-            <img src="{% static 'user.webp' %}" class="img-fluid rounded" style="max-width: 300px;max-height: 300px;">
+            <img src="{% static 'user.webp' %}" class="img-fluid rounded" style="width: 100%; max-width: 15vw; height: auto;">
         </div>
-        <h1 class="text-center mb-4">Moje konto</h1>
+        <h1 class="text-center mb-1 fs-5">Moje konto</h1>
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3">
+            <div class="col-12 col-sm-10 col-md-5 col-lg-5 col-xl-4">
+                <div class="mb-2">
                     <label for="email" class="form-label">Adres e-mail:</label>
                     <input type="email" class="form-control" id="mail" value="{{ mail }}" readonly>
                 </div>
-    
-                <div class="d-grid gap-3 mt-5">
+                {% if not type %}
+                <div class="col-12">
+                    <label class="form-label">Postęp kursu: </label>
+                    <div class="progress" style="height: 3vh;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ progress }}%
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="d-grid gap-2 mt-3 btn-md">
                     <a href="https://discord.com/channels/1366385364209762386/1366385364675072071" 
-                       class="btn btn-primary btn-lg"
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                       Dołącz do naszej społeczności <strong>Discord</strong>!
+                    class="btn btn-primary btn-lg"
+                    target="_blank" 
+                    rel="noopener noreferrer">
+                    Dołącz do naszej społeczności <strong>Discord</strong>!
                     </a>
-    
+
                     {% if type %}
                         <div class="alert alert-warning text-center" role="alert">
                             Kup kurs, aby otrzymać dostęp do wszystkich dostępnych treści na platformie <strong>ProjectMatura.io</strong>.
                         </div>
                     {% else %}
-                        
-                        <button id="res" class="btn btn-danger btn-lg w-100">
+                        <button id="res" class="btn btn-danger btn-lg w-100 btn-md">
                             Zrezygnuj z subskrypcji
                         </button>
-                        
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    
     
     
 
