@@ -12,13 +12,12 @@ import stripe
 from dotenv import load_dotenv
 load_dotenv()
 stripe.api_key = os.getenv('STRIPE_SECRET')
-
 def home(req):
     if(req.method=="GET"):
         if 'id' in req.session:
             return redirect('main')
-        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
-            token = req.COOKIES['remember_token']
+        if os.getenv("TOKEN") in req.COOKIES and req.COOKIES[os.getenv("TOKEN")]!=None:
+            token = req.COOKIES[os.getenv("TOKEN")]
             mail = postgresql.get_mail_from_token(token)
             if mail:
                 req.session['id'] = postgresql.encode_id(mail)
@@ -33,8 +32,8 @@ def expired(req):
 def signUP(req):
     if req.method=="GET":
         if 'id' in req.session: redirect('main')
-        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
-            token = req.COOKIES['remember_token']
+        if os.getenv('TOKEN') in req.COOKIES and req.COOKIES[os.getenv('TOKEN')]!=None:
+            token = req.COOKIES[os.getenv('TOKEN')]
             email = postgresql.get_mail_from_token(token)
             if email:
                 req.session['id'] = postgresql.encode_id(email)
@@ -55,8 +54,8 @@ def signUP(req):
 def signIN(req):
     if req.method=="GET":
         if 'id' in req.session: redirect('main')
-        if 'remember_token' in req.COOKIES and req.COOKIES['remember_token']!=None:
-            token = req.COOKIES['remember_token']
+        if os.getenv("TOKEN") in req.COOKIES and req.COOKIES[os.getenv('TOKEN')]!=None:
+            token = req.COOKIES[os.getenv('TOKEN')]
             mail = postgresql.get_mail_from_token(token)
             if mail:
                 req.session['id'] = postgresql.encode_id(mail)
@@ -74,7 +73,7 @@ def signIN(req):
                 postgresql.delete_tokens(mail)
                 token = postgresql.add_token(mail)
                 response.set_cookie(
-                    'remember_token',
+                    os.getenv("TOKEN"),
                     token,
                     max_age=3600*24*30,
                     httponly=True,
@@ -87,8 +86,8 @@ def signIN(req):
 def main(req):
     if 'id' in req.session:
         mail = postgresql.decode_id(req.session['id'])    
-    elif 'remember_token' in req.COOKIES:
-        token = req.COOKIES['remember_token']
+    elif os.getenv('TOKEN') in req.COOKIES:
+        token = req.COOKIES[os.getenv('TOKEN')]
         mail = postgresql.get_mail_from_token(token)
         if mail:
             req.session['id'] = postgresql.encode_id(mail)
@@ -98,7 +97,6 @@ def main(req):
         return redirect('expired')
     if postgresql.is_subscription_active(mail):
         courses=postgresql.get_progress(mail)
-        print(courses)
         if courses!=None:
             return render(req, 'myapp/full.html',{'mail': mail,'courses':courses})
         return render(req, 'myapp/full.html',{'mail': mail})
@@ -110,11 +108,11 @@ def main(req):
 def log_out(req):
     if req.method=='POST':
         req.session.flush() 
-        remember_token = req.COOKIES.get('remember_token')
+        remember_token = req.COOKIES.get(os.getenv('TOKEN'))
         if remember_token!=None:
             postgresql.delete_tokens(remember_token)
         response = redirect('signIN')
-        response.delete_cookie('remember_token')
+        response.delete_cookie(os.getenv('TOKEN'))
         return response
 
 
@@ -130,7 +128,7 @@ def acc(req):
                     return render(req,'myapp/account.html',{'mail': mail,'type':type,'progress':progress})
                 return render(req,'myapp/account.html',{'mail': mail,'type':type,'progress':0})
         else:
-            token = req.COOKIES['remember_token']
+            token = req.COOKIES[os.getenv('TOKEN')]
             if token!=None:
                 mail=postgresql.get_mail_from_token(token)
                 if postgresql.find(mail):
@@ -203,8 +201,8 @@ def progress(req):
         if(postgresql.find(mail)):
             postgresql.save_course(mail,course)
             return JsonResponse({'status':200})
-    elif req.COOKIES['remember_token']!=None:
-        mail=postgresql.get_mail_from_token(req.COOKIES['remember_token'])
+    elif req.COOKIES[os.getenv('TOKEN')]!=None:
+        mail=postgresql.get_mail_from_token(req.COOKIES[os.getenv('TOKEN')])
         if(postgresql.find(mail)):
             postgresql.save_course(mail,course)
             return JsonResponse({'status':200})
@@ -219,8 +217,8 @@ def get_progress(req):
             if content!=None:
                 return JsonResponse({'status':200,'courses':postgresql.get_progress(mail)})
             return JsonResponse({'status':200})
-    elif req.COOKIES['remember_token']!=None:
-        mail=postgresql.get_mail_from_token(req.COOKIES['remember_token'])
+    elif req.COOKIES[os.getenv('TOKEN')]!=None:
+        mail=postgresql.get_mail_from_token(req.COOKIES[os.getenv('TOKEN')])
         if(postgresql.find(mail)): 
             content=postgresql.get_progress(mail)
             if content!=None:
