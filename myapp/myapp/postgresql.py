@@ -1,9 +1,10 @@
 import bcrypt#type: ignore
 import time
 from uuid import uuid4
-from .models import User, Token, Payment, UserProgress
+from .models import User, Token, Payment, UserProgress, UserAuth
 import stripe
 import os
+import random
 from dotenv import load_dotenv
 load_dotenv()
 stripe.api_key = os.getenv('STRIPE_SECRET')
@@ -77,6 +78,21 @@ def decode_id(id):
         if(chr(ord(id[i])-shift)):
             result+=str(chr(ord(id[i])-shift))
     return result
+
+
+def generate_auth(mail:str)->str:
+    code=""
+    for i in range(6):
+        if i%2==0:
+            code+=chr(random.randint(65,90))
+        else: code+=str(random.randint(0,9))
+    try:
+        past=UserAuth.objects.get(mail=mail,code=code)
+        past.delete()
+    except UserAuth.DoesNotExist:
+        pass
+    UserAuth.objects.create(mail=mail,code=code)
+    return code
 
 
 def get_progress(mail):

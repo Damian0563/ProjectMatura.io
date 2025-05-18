@@ -19,3 +19,6 @@ class UserProgress(models.Model):
     mail=models.CharField(max_length=50)
     courses=models.CharField(max_length=30)
 
+class UserAuth(models.Model):
+    mail=models.CharField(max_length=50)
+    code=models.CharField(max_length=10)
