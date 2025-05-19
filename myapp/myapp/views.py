@@ -28,13 +28,16 @@ def expired(req):
     return render(req,'myapp/session_expired.html')
 
 
+@ensure_csrf_cookie
 def check(req):
     data = json.loads(req.body)
     user_mail = data.get('mail')
-    if(not postgresql.find(user_mail)):      
-        return JsonResponse({'status':200})
+    if postgresql.find(user_mail):      
+        return JsonResponse({'message': 'User already exists','code':400})
     else:
-        return JsonResponse({'status':400})
+        mail.account_creation(user_mail)
+        return JsonResponse({'message': 'Success','code':200})
+        
 
 @ensure_csrf_cookie
 def signUP(req):
@@ -56,6 +59,7 @@ def signUP(req):
             postgresql.insert(user_mail,password)
             mail.account_creation(user_mail)
             return redirect('main')
+        return render(req,'myapp/signUP.html')
         
         
 

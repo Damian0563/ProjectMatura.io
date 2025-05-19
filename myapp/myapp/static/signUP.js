@@ -39,26 +39,29 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }).then(response=>response.json())
         .catch(e=>console.error(e))
-
-
-        document.getElementById('sign').addEventListener('click',()=>{
-            fetch('/check',{
-                method:"POST",
-                headers:{'Content-Type':'application-json'},
-                body:JSON.stringify({
-                    "mail":document.getElementById('mail').value
-                })
-            })
-            .then(data=>{
-                if(data.status==200){
-                    document.getElementById('code-form').style.display='block'
-                }   
-                else if(data.status==400){
-                    document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
-                    document.getElementById('popup').style.display='grid'
-                }
+    })
+    document.getElementById('sign').addEventListener('click', async()=>{
+        fetch('/check',{
+            method:"POST",
+            headers:{
+                'Content-Type':'application-json',
+                'X-CSRFToken': csrftoken,
+            },
+            body:JSON.stringify({
+                "mail":document.getElementById('floatingInput').value
             })
         })
+        .then(response=>response.json())
+        .then(data=>{
+            console.log(data.code)
+            if(data.code==200){
+                document.getElementById('code-form').style.display='block'
+            }   
+            else if(data.code==400){
+                document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
+                document.getElementById('popup').style.display='grid'
+            }
+        })
+        .catch(e=>console.error(e))
     })
-    
 })
