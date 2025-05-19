@@ -95,6 +95,13 @@ def generate_auth(mail:str)->str:
     return code
 
 
+def get_auth(mail):
+    try:
+        entry=UserAuth.objects.get(mail=mail)
+        return entry.code
+    except UserAuth.DoesNotExist:
+        return -1
+
 def get_progress(mail):
     try:
         return [progress.courses for progress in UserProgress.objects.filter(mail=mail)]

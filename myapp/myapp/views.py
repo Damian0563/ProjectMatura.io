@@ -24,9 +24,17 @@ def home(req):
                 return redirect('main')
         return render(req,'myapp/home.html')
     
-
 def expired(req):
     return render(req,'myapp/session_expired.html')
+
+
+def check(req):
+    data = json.loads(req.body)
+    user_mail = data.get('mail')
+    if(not postgresql.find(user_mail)):      
+        return JsonResponse({'status':200})
+    else:
+        return JsonResponse({'status':400})
 
 @ensure_csrf_cookie
 def signUP(req):
@@ -43,12 +51,13 @@ def signUP(req):
         data = json.loads(req.body)
         user_mail = data.get('mail')
         password = data.get('password')
-        if(not postgresql.find(user_mail)):
+        code=data.get('code')
+        if(code==postgresql.get_auth(user_mail)):
             postgresql.insert(user_mail,password)
             mail.account_creation(user_mail)
-            return JsonResponse({'status':200})
-        else:
-            return JsonResponse({'status':402})
+            return redirect('main')
+        
+        
 
 @ensure_csrf_cookie
 def signIN(req):

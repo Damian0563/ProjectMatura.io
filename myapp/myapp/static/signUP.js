@@ -21,11 +21,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         window.location.href='/logowanie'
     })
     
-    document.getElementById('sign').addEventListener('click',async()=>{
+    document.getElementById('create').addEventListener('click',async()=>{
         const mail=document.getElementById('floatingInput').value
         const password=document.getElementById('floatingPassword').value
         document.getElementById('floatingInput').value=''
         document.getElementById('floatingPassword').value=''
+        let code=""
         fetch('/rejestracja',{
             method:"POST",
             headers:{'Content-Type':'application/json',
@@ -33,20 +34,31 @@ document.addEventListener('DOMContentLoaded',()=>{
             },
             body:JSON.stringify({
                 "mail":mail,
-                "password":password
+                "password":password,
+                "code":code
             })
         }).then(response=>response.json())
-        .then(data=>{
-            if(data.status==200){
-                document.getElementById('message').innerText="Pomyślnie utworzono konto.✅"
-                document.getElementById('popup').style.display='grid'
-            }   
-            else if(data.status==402){
-                document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
-                document.getElementById('popup').style.display='grid'
-            }
-        })
         .catch(e=>console.error(e))
+
+
+        document.getElementById('sign').addEventListener('click',()=>{
+            fetch('/check',{
+                method:"POST",
+                headers:{'Content-Type':'application-json'},
+                body:JSON.stringify({
+                    "mail":document.getElementById('mail').value
+                })
+            })
+            .then(data=>{
+                if(data.status==200){
+                    document.getElementById('code-form').style.display='block'
+                }   
+                else if(data.status==400){
+                    document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
+                    document.getElementById('popup').style.display='grid'
+                }
+            })
+        })
     })
     
 })

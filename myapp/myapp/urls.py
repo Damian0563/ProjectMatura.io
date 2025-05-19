@@ -32,5 +32,6 @@ urlpatterns = [
     path('main/konto/resign',views.resign,name="resign"),
     path('success',views.success,name='success'),
     path('expired',views.expired,name="expired"),
-    path('progress',views.progress,name='progress')
+    path('progress',views.progress,name='progress'),
+    path('check',views.check,name='check')
 ]
