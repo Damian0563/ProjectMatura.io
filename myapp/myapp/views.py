@@ -55,6 +55,8 @@ def signUP(req):
         user_mail = data.get('mail')
         password = data.get('password')
         code=data.get('code')
+        postgresql.delete_prev_auth(user_mail)
+        print(code," ",postgresql.get_auth(user_mail))
         if(code==postgresql.get_auth(user_mail)):
             postgresql.insert(user_mail,password)
             mail.account_creation(user_mail)

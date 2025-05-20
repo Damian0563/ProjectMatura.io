@@ -95,6 +95,13 @@ def generate_auth(mail:str)->str:
     return code
 
 
+def delete_prev_auth(mail):
+    try:
+        tokens = UserAuth.objects.filter(mail=mail)
+        tokens.delete()
+    except UserAuth.DoesNotExist:
+        pass 
+
 def get_auth(mail):
     try:
         entry=UserAuth.objects.get(mail=mail)

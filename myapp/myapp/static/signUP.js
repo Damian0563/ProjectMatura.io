@@ -24,9 +24,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('create').addEventListener('click',async()=>{
         const mail=document.getElementById('floatingInput').value
         const password=document.getElementById('floatingPassword').value
+        let code=""
+        for(let i=1;i<=6;i++){
+            code+=document.getElementById(i).value
+            document.getElementById(i).value=''
+        }
         document.getElementById('floatingInput').value=''
         document.getElementById('floatingPassword').value=''
-        let code=""
+        
         fetch('/rejestracja',{
             method:"POST",
             headers:{'Content-Type':'application/json',
