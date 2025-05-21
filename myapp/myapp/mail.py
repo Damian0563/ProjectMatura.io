@@ -7,7 +7,7 @@ import smtplib
 load_dotenv()
 
 def account_creation(mail):
-
+    postgresql.delete_prev_auth(mail)
     code=postgresql.generate_auth(mail)
     html = f"""\
     <html>

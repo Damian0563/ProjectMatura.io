@@ -42,7 +42,7 @@ def check(req):
 @ensure_csrf_cookie
 def signUP(req):
     if req.method=="GET":
-        if 'id' in req.session: redirect('main')
+        if 'id' in req.session: return redirect('main')
         if os.getenv('TOKEN') in req.COOKIES and req.COOKIES[os.getenv('TOKEN')]!=None:
             token = req.COOKIES[os.getenv('TOKEN')]
             email = postgresql.get_mail_from_token(token)
@@ -55,13 +55,11 @@ def signUP(req):
         user_mail = data.get('mail')
         password = data.get('password')
         code=data.get('code')
-        postgresql.delete_prev_auth(user_mail)
-        print(code," ",postgresql.get_auth(user_mail))
         if(code==postgresql.get_auth(user_mail)):
             postgresql.insert(user_mail,password)
-            mail.account_creation(user_mail)
-            return redirect('main')
-        return render(req,'myapp/signUP.html')
+            req.session['id'] = postgresql.encode_id(user_mail)
+            return JsonResponse({'status':'ok'})
+        return JsonResponse({'status':'fail'})
         
         
 
@@ -100,15 +98,13 @@ def signIN(req):
         
 def main(req):
     if 'id' in req.session:
-        mail = postgresql.decode_id(req.session['id'])    
+        mail = postgresql.decode_id(req.session['id'])  
     elif os.getenv('TOKEN') in req.COOKIES:
         token = req.COOKIES[os.getenv('TOKEN')]
         mail = postgresql.get_mail_from_token(token)
         if mail:
             req.session['id'] = postgresql.encode_id(mail)
-        else:
-            return redirect('expired') 
-    else:
+    if not mail:
         return redirect('expired')
     if postgresql.is_subscription_active(mail):
         courses=postgresql.get_progress(mail)

@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                 "password":password,
                 "code":code
             })
-        }).then(response=>response.json())
+        }).then(data=>{
+            window.location.reload()
+        })
         .catch(e=>console.error(e))
     })
     document.getElementById('sign').addEventListener('click', async()=>{
@@ -58,7 +60,6 @@ document.addEventListener('DOMContentLoaded',()=>{
         })
         .then(response=>response.json())
         .then(data=>{
-            console.log(data.code)
             if(data.code==200){
                 document.getElementById('code-form').style.display='block'
             }   
