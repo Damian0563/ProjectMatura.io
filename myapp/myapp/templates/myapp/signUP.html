@@ -75,23 +75,40 @@
     </div>
     </div>
 
-    <div id="code-form" class="position-fixed bg-dark text-white p-5 rounded shadow-lg mx-auto" style="max-width: 600px;margin-left:25% !important ;display: none !important;">
-      <button type="button" onclick="document.getElementById('code-form').style.display='none'" 
-              class="position-absolute top-0 end-0 m-3 btn btn-sm p-1 bg-transparent border-0">
+
+    <div id="pop" 
+     class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
+     style="background-color: rgba(0,0,0,0.6); z-index: 1050;display: none !important;">
+      <div class="bg-dark text-white p-4 rounded shadow-lg" style="max-width: 500px; width: 90%;">
+          <button type="button" 
+            onclick="document.getElementById('pop').style.setProperty('display','none','important')" 
+            style="position: relative;float: right; background: transparent; border: none; padding: 0;">
+            <img src="{% static 'cross.webp' %}" alt="Close" style="width: 20px; height: 20px; display: block;">
+          </button>
+          <p class="mb-2 fw-semibold" id="message">
+              Utworzenie konta na podany adres e-mail nie jest możliwe, spróbuj ponownie.
+          </p>
+      </div>
+    </div>
+
+    <div id="code-form" class="top-50 start-50 translate-middle position-fixed bg-dark text-white p-5 rounded shadow-lg" style="max-width: 600px;display: none !important;z-index: 1050;">
+      <button type="button" onclick="document.getElementById('code-form').style.display='none';document.getElementById('floatingPassword').value='';document.getElementById('floatingInput').value='';" class="position-absolute top-0 end-0 m-3 btn btn-sm p-1 bg-transparent border-0">
         <img src="{% static 'cross.webp' %}" alt="Zamknij" style="width: 20px; height: 20px;">
       </button>
       <h1 class="mb-4 text-center fs-5 fw-semibold">Wpisz kod wysłany na podany adres e-mail:</h1>
       <div id="code-input" class="d-flex justify-content-center gap-3">
-        <input type="text" id="1" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
-        <input type="text" id="2"  maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
-        <input type="text" id=3 maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
-        <input type="text" id="4" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
-        <input type="text" id="5" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
-        <input type="text" id="6" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 48px; height: 56px; font-size: 24px;" />
+        <input type="text" id="1" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;" />
+        <input type="text" id="2"  maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;" />
+        <input type="text" id=3 maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;" />
+        <input type="text" id="4" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;" />
+        <input type="text" id="5" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;" />
+        <input type="text" id="6" maxlength="1" class="form-control text-center rounded border-0 shadow-sm bg-secondary text-white" style="width: 5vw; height: 10vh; font-size: 1.5rem;font-weight: bolder;"/>
       </div>
-        <button id="create" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm fw-semibold">
+      <div class="d-flex justify-content-center mt-4">
+        <button id="create" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm fw-semibold" onclick="document.getElementById('code-form').style.display='none'">
           Utwórz konto
         </button>
+      </div>
     </div>
 
 

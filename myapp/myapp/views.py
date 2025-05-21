@@ -58,8 +58,8 @@ def signUP(req):
         if(code==postgresql.get_auth(user_mail)):
             postgresql.insert(user_mail,password)
             req.session['id'] = postgresql.encode_id(user_mail)
-            return JsonResponse({'status':'ok'})
-        return JsonResponse({'status':'fail'})
+            return JsonResponse({'code':'good'})
+        return JsonResponse({'code':'bad'})
         
         
 
