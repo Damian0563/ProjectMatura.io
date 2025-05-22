@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         }).then(response => response.json())
         .then(data=>{
             if (data.code === "bad") {
-                console.log('temp');
+                document.getElementById('popup').style.display='flex'
+                document.getElementById('floatingPassword').value=''
+                document.getElementById('floatingInput').value=''
             } else {
                 window.location.reload();
             }
@@ -69,8 +71,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                 document.getElementById('code-form').style.display='block'
             }   
             else if(data.code==400){
-                document.getElementById('message').innerText="Rejestracja na podany adres mail się nie powiodła.❌"
                 document.getElementById('pop').style.display='flex'
+                document.getElementById('floatingPassword').value=''
+                document.getElementById('floatingInput').value=''
             }
         })
         .catch(e=>console.error(e))

@@ -41,41 +41,6 @@
         </div>
     </nav>
     
-    <div id="popup" style="
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* półprzezroczyste tło */
-    z-index: 1050;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-">
-  <div style="
-      background-color: white;
-      border: 2px solid black;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-  ">
-    <button type="button" onclick="document.getElementById('popup').style.display='none'" style="
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background: none;
-        border: none;
-    ">
-      <img src="{% static 'cross.webp' %}" alt="Close" style="width: 16px; height: 16px;margin-left: 2%;">
-    </button>
-    <h1 id="message" style="color: black; font-size: 24px;">Tutaj wiadomość</h1>
-    </div>
-    </div>
-
-
     <div id="pop" 
      class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
      style="background-color: rgba(0,0,0,0.6); z-index: 1050;display: none !important;">
@@ -83,7 +48,7 @@
           <button type="button" 
             onclick="document.getElementById('pop').style.setProperty('display','none','important')" 
             style="position: relative;float: right; background: transparent; border: none; padding: 0;">
-            <img src="{% static 'cross.webp' %}" alt="Close" style="width: 20px; height: 20px; display: block;">
+            <img src="{% static 'remove.webp' %}" alt="Close" style="width: 20px; height: 20px; display: block;">
           </button>
           <p class="mb-2 fw-semibold" id="message">
               Utworzenie konta na podany adres e-mail nie jest możliwe, spróbuj ponownie.
@@ -91,9 +56,24 @@
       </div>
     </div>
 
+    <div id="popup" 
+     class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
+     style="background-color: rgba(0,0,0,0.6); z-index: 1050;display: none !important;">
+      <div class="bg-dark text-white p-4 rounded shadow-lg" style="max-width: 500px; width: 90%;">
+          <button type="button" 
+            onclick="document.getElementById('popup').style.setProperty('display','none','important')" 
+            style="position: relative;float: right; background: transparent; border: none; padding: 0;">
+            <img src="{% static 'remove.webp' %}" alt="Close" style="width: 20px; height: 20px; display: block;">
+          </button>
+          <p class="mb-2 fw-semibold" id="mess">
+              Nieprawidłowy kod autentykacji, spróbuj ponownie.
+          </p>
+      </div>
+    </div>
+
     <div id="code-form" class="top-50 start-50 translate-middle position-fixed bg-dark text-white p-5 rounded shadow-lg" style="max-width: 600px;display: none !important;z-index: 1050;">
       <button type="button" onclick="document.getElementById('code-form').style.display='none';document.getElementById('floatingPassword').value='';document.getElementById('floatingInput').value='';" class="position-absolute top-0 end-0 m-3 btn btn-sm p-1 bg-transparent border-0">
-        <img src="{% static 'cross.webp' %}" alt="Zamknij" style="width: 20px; height: 20px;">
+        <img src="{% static 'remove.webp' %}" alt="Zamknij" style="width: 20px; height: 20px;">
       </button>
       <h1 class="mb-4 text-center fs-5 fw-semibold">Wpisz kod wysłany na podany adres e-mail:</h1>
       <div id="code-input" class="d-flex justify-content-center gap-3">
