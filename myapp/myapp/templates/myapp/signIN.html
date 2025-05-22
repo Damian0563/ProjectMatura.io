@@ -32,8 +32,8 @@
               <ul class="navbar-nav flex-grow-1 justify-content-between">
                 <li class="nav-item"><a class="nav-link" href="/">Strona główna</a></li>
                 <li class="nav-item"><a class="nav-link" href="/#about">O mnie</a></li>
-                <li class="nav-item"><a class="nav-link" href="/kurs#">Zakres kursu</a></li>
-                <li class="nav-item"><a class="nav-link" href="/kurs#">Cena</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#kurs">Zakres kursu</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#kurs">Cena</a></li>
                 <button id="signUP" class="btn btn-primary">Zarejestruj się</button>
               </ul>
             </div>
@@ -41,37 +41,18 @@
         </div>
     </nav>
     {% if error %}
-      <div id="popup" style="
-      display: flex;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1050;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      ">
-        <div style="
-        background-color: white;
-        border: 2px solid black;
-        border-radius: 10px;
-        padding: 20px;
-        max-width: 500px;
-        width: 100%;
-        text-align: center;
-        position: relative;
-        ">
-        <button type="button" onclick="document.getElementById('popup').style.display='none'" style="
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          background: none;
-          border: none;
-        ">
-          <img src="{% static 'cross.webp' %}" alt="Close" style="width: 16px; height: 16px;margin-left: 2%;">
-        </button>
-        <h1 id="message" style="color: black; font-size: 24px;">{{message}}</h1>
+      <div id="popup" 
+        class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
+        style="background-color: rgba(0,0,0,0.6); z-index: 1050;">
+        <div class="bg-dark text-white p-4 rounded shadow-lg" style="max-width: 500px; width: 90%;">
+            <button type="button" 
+              onclick="document.getElementById('popup').style.setProperty('display','none','important')" 
+              style="position: relative;float: right; background: transparent; border: none; padding: 0;">
+              <img src="{% static 'remove.webp' %}" alt="Close" style="width: 20px; height: 20px; display: block;">
+            </button>
+            <p class="mb-2 fw-semibold" id="mess">
+                Logowanie nie powiodło się. Niepoprawne dane logowania
+            </p>
         </div>
       </div>
     {% endif %}

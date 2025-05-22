@@ -94,7 +94,7 @@ def signIN(req):
                 )
             return response
         else:
-            return render(req,'myapp/signIN.html',{'error':True,'message':'Logowanie nie powiodło się.❌'})
+            return render(req,'myapp/signIN.html',{'error':True})
         
 def main(req):
     if 'id' in req.session:
