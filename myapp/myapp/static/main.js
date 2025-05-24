@@ -101,6 +101,20 @@ document.addEventListener('DOMContentLoaded',()=>{
             video.style.objectFit='cover'
             div.appendChild(video);
             document.getElementById('content').appendChild(div);
+            if(id!=="Wprowadzenie"){        
+                let new_v="";
+                if(id=="LiczbyR") new_v="Liczby Rzeczywiste";
+                else if(id=="ZadaniaO") new_v="Zadania optymalizacyjne";
+                else if(id=="Równania") new_v="Równania i nierówności";
+                const down = document.createElement('div');
+                const link = document.createElement('a');
+                link.setAttribute('href', `static/${new_v}.pdf`);
+                link.setAttribute('download', `Zadanie domowe - ${new_v}.pdf`);
+                link.textContent = `📄 Pobierz zadanie domowe: ${new_v}`;
+                down.className = 'd-flex justify-content-center my-4';
+                link.className = 'btn btn-primary';
+                document.getElementById('content').appendChild(link);
+            }
             document.getElementById('done').addEventListener('click',()=>{
                 document.getElementById('done').style.setProperty("display","none",'important')
                 document.getElementById(`check${id}`).style.setProperty("display","flex")
