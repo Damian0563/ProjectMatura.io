@@ -97,15 +97,16 @@ def signIN(req):
             return render(req,'myapp/signIN.html',{'error':True})
         
 def main(req):
+    mail=None
     if 'id' in req.session:
         mail = postgresql.decode_id(req.session['id'])  
+        if mail is None: return redirect('expired')
     elif os.getenv('TOKEN') in req.COOKIES:
         token = req.COOKIES[os.getenv('TOKEN')]
         mail = postgresql.get_mail_from_token(token)
         if mail:
             req.session['id'] = postgresql.encode_id(mail)
-    if not mail:
-        return redirect('expired')
+        else: return redirect('expired')    
     if postgresql.is_subscription_active(mail):
         courses=postgresql.get_progress(mail)
         if courses!=None:
