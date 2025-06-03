@@ -33,15 +33,15 @@
           *{
             font-size: 0.85rem;
           }
-        }
-
-        @media(max-width:885px){
-          *{
-            font-size: 0.8rem;
+          #checkWprowadzenie,#checkFunkcje,#checkLiczbyR,#checkLogarytmy,#checkRównania,#checkTrygonometria,
+          #checkGeometria,#checkPlanimetria,#checkKombinatoryka,#checkPrawdopodobieństwo,
+          #checkCiągi,#checkOkręgi,#checkZadaniaO,#checkPodsumowanie{
+            width: 15px !important;
+            height: 15px !important;
           }
         }
 
-        @media(max-width:800px){
+        @media(max-width:885px){
           *{
             font-size: 0.75rem;
           }
@@ -52,15 +52,29 @@
             height: 10px !important;
           }
         }
-        @media(max-width:630px){
+
+        @media(max-width:800px){
           *{
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+          }
+          .row.h-100 {
+            flex-direction: column;
+          }
+          .row.h-100 > .col-3,
+          .row.h-100 > .col-9 {
+            width: 100%;
+            max-width: 100%;
+          }
+          #checkWprowadzenie,#checkFunkcje,#checkLiczbyR,#checkLogarytmy,#checkRównania,#checkTrygonometria,
+          #checkGeometria,#checkPlanimetria,#checkKombinatoryka,#checkPrawdopodobieństwo,
+          #checkCiągi,#checkOkręgi,#checkZadaniaO,#checkPodsumowanie{
+            width: 12px !important;
+            height: 12px !important;
           }
         }
-        @media(max-width:450px){
-          *{
-            font-size: 0.6rem;
-          }
+        .row.h-100 {
+          display: flex;
+          flex-direction: row; /* default for larger screens */
         }
     </style>
     <nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark">

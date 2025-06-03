@@ -97,7 +97,6 @@ def signIN(req):
             return render(req,'myapp/signIN.html',{'error':True})
         
 def main(req):
-    mail=None
     if 'id' in req.session:
         mail = postgresql.decode_id(req.session['id'])  
         if mail is None: return redirect('expired')
