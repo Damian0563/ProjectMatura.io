@@ -4,11 +4,12 @@ The aim is to make quality educational content that are supported with top notch
 provide continous service. 
 
 ### Snapshots
-<img src="myapp/static/readme/landing.png" alt="landing page" style="width:600px;">
-<img src="myapp/static/readme/sign.png" alt="signing page" style="width:600px;">
-<img src="myapp/static/readme/intro.png" alt="intro page" style="width:600px;">
-<img src="myapp/static/readme/sample.png" alt="sample course page" style="width:600px;">
-<img src="myapp/static/readme/account.png" alt="account tab" style="width:600px;">
+<img src="myapp/myapp/static/readme/landing.png" alt="landing page" style="width:600px;">
+<img src="myapp/myapp/static/readme/sign.png" alt="signing page" style="width:600px;">
+<img src="myapp/myapp/static/readme/intro.png" alt="intro page" style="width:600px;">
+<img src="myapp/myapp/static/readme/sample.png" alt="sample course page" style="width:600px;">
+<img src="myapp/myapp/static/readme/account.png" alt="account tab" style="width:600px;">
+
 ## Features
 - Subscription based monthly payments
 - Persistant remember me cookies
