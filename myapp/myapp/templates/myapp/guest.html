@@ -18,6 +18,9 @@
       }
     </script>
     <style>
+        .shrink{
+          width:6vw !important
+        }
         #signout{
             transition: 0.5s ease-in-out;
         }
@@ -105,9 +108,14 @@
 
     <div class="container-fluid bg-dark text-white vh-100">
       <div class="row h-100">
-        <div class="col-3 bg-secondary p-3">
-          <h5 class="mb-3">Rozdziały</h5>
-          <ul class="nav flex-column">
+        <div class="col-3 bg-secondary p-3" id="sidebar">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0" id="header">Rozdziały</h5>
+            <button value="on" id="toggler" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+              <img src="{% static 'setting.webp' %}" style="width:4vw;height:auto;">
+            </button>
+          </div>
+          <ul class="nav flex-column" id="rozdzialy">
             <li class="nav-item mb-2">
               <a class="nav-link bg-light text-dark border rounded px-3 py-2" id="Wprowadzenie">Wprowadzenie</a>
             </li>

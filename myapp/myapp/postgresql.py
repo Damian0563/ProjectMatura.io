@@ -94,6 +94,20 @@ def generate_auth(mail:str)->str:
     UserAuth.objects.create(mail=mail,code=code)
     return code
 
+def change_password(mail:str,password:str)->bool:
+    try:
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+        user=User.objects.get(mail=mail)
+        user.password=hashed.decode('utf-8')
+        user.save()
+        return True
+    except User.DoesNotExist:
+        return False
+    except Exception as e:
+        # Server error
+        print(e)
+        return False
 
 def delete_prev_auth(mail):
     try:

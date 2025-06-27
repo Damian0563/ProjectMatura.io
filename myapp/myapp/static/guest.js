@@ -53,7 +53,25 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('no').addEventListener('click',()=>{
         document.getElementById('pop').style.display="none"
     })
-
+    document.getElementById('toggler').addEventListener('click',()=>{
+        if(document.getElementById('toggler').value==='on'){
+            document.getElementById('rozdzialy').style.display = 'none'
+            document.getElementById('sidebar').classList.add('shrink','bg-dark')
+            document.getElementById('header').style.display='none'
+            document.getElementById('main').classList.remove('col-9')
+            document.getElementById('main').style.marginLeft='5%'
+            document.getElementById('main').classList.add('col-10', 'justify-content-center', 'align-items-center');
+            document.getElementById('toggler').value='off'
+        }else{
+            document.getElementById('rozdzialy').style.display = 'flex'
+            document.getElementById('sidebar').classList.remove('shrink','bg-dark')
+            document.getElementById('header').style.display='flex'
+            document.getElementById('main').style.marginLeft='0%'
+            document.getElementById('main').classList.remove('col-10', 'justify-content-center', 'align-items-center')
+            document.getElementById('main').classList.add('col-9')
+            document.getElementById('toggler').value='on'
+        }
+    })
 
     document.getElementById('Wprowadzenie').addEventListener('click',()=>{
         document.getElementById('content').innerHTML=''

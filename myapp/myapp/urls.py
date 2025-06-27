@@ -33,5 +33,7 @@ urlpatterns = [
     path('success',views.success,name='success'),
     path('expired',views.expired,name="expired"),
     path('progress',views.progress,name='progress'),
-    path('check',views.check,name='check')
+    path('check',views.check,name='check'),
+    path('encode',views.encode,name='encode'),
+    path('restore/<str:id>',views.restore,name='restore')
 ]

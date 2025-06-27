@@ -60,8 +60,27 @@ def signUP(req):
             req.session['id'] = postgresql.encode_id(user_mail)
             return JsonResponse({'code':'good'})
         return JsonResponse({'code':'bad'})
-        
-        
+
+@ensure_csrf_cookie
+def restore(req,id):
+    email=postgresql.decode_id(id)
+    if req.method=='GET':
+        return render(req,'myapp/restore.html',{'mail':email})
+    elif req.method=='PUT':
+        data=json.loads(req.body)
+        new_password=data.get('new_password')
+        if postgresql.change_password(email,new_password):
+            return JsonResponse({'status':200})
+        return JsonResponse({'status':500})
+
+@ensure_csrf_cookie
+def encode(req):
+    data = json.loads(req.body)
+    user_mail = data.get('mail')
+    if postgresql.find(user_mail):
+        encoding=postgresql.encode_id(user_mail)
+        return JsonResponse({'status':200,'url':f"/restore/{encoding}"})
+    return JsonResponse({'status':400})
 
 @ensure_csrf_cookie
 def signIN(req):

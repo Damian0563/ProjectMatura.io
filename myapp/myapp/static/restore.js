@@ -1,4 +1,5 @@
 
+
 document.addEventListener('DOMContentLoaded',()=>{
 
     function getCookie(name) {
@@ -17,43 +18,47 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     const csrftoken = getCookie('csrftoken');
 
-    document.getElementById('forget').addEventListener('click',async()=>{
-        const mail=document.getElementById('floatingInput').value
-        console.log(mail)
-        if(mail!==""){
+    document.getElementById('signin').addEventListener('click',()=>{
+        window.location.href='/logowanie'
+    })
+    document.getElementById('signup').addEventListener('click',()=>{
+        window.location.href='/rejestracja'
+    })
+
+    document.getElementById('confirm').addEventListener('click', async()=>{
+        const first=document.getElementById('first').value.trim()
+        const second=document.getElementById('repeat').value.trim()
+        if(first===second && first.trim()!==""){
             try{
-                data=await fetch('/encode',{
-                    "method":"POST",
+                data=await fetch(window.location.href,{
+                    method:'PUT',
                     headers:{
                         'Content-Type':'application/json',
                         'X-CSRFToken':csrftoken
                     },
-                    credentials:'include',
                     body:JSON.stringify({
-                        'mail':mail
+                        'new_password':first
                     })
                 })
-                response=await data.json()
+                response= await data.json()
                 if(response.status===200){
-                    window.location.href=`${response.url}`
-                }else if(response.status===400){
                     document.getElementById('alert').classList.remove('d-none')
                     document.getElementById('alert').classList.add('d-flex')
-                    document.getElementById('alert-mess').innerText='Podany adres mailowy nie jest zarejestrowany na naszej platformie. Utwórz konto'
+                    document.getElementById('alert-mess').innerText='Hasło zmienione pomyślnie.✅'
+                }
+                else{
+                    document.getElementById('alert').classList.remove('d-none')
+                    document.getElementById('alert').classList.add('d-flex')
+                    document.getElementById('alert-mess').innerText='Błąd podczas zmiany hasła.'
                 }
             }catch(e){
                 console.error(e)
             }
-        }
-        else{
+        }else{
             document.getElementById('alert').classList.remove('d-none')
             document.getElementById('alert').classList.add('d-flex')
-            document.getElementById('alert-mess').innerText='Wpisz adres mailowy w odpowiednie pole, aby otrzymać formularz odzyskiwania hasła.'
+            document.getElementById('alert-mess').innerText='Podane hasła się różnią. Spróbuj ponownie.'
         }
-    })
-    
-    document.getElementById('signUP').addEventListener('click',()=>{
-        window.location.href='/rejestracja'
     })
 
 })
