@@ -33,4 +33,8 @@ django-admin startproject myapp
 python manage.py runserver
 pip freeze > requirements.txt
 stripe listen --forward-to localhost:8000/webhook/
+
+docker build -t project_matura_io .
+docker compose up --build
+docker compose down
 ```
